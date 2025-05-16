@@ -1,0 +1,76 @@
+package lk.ijse.finalproject.model;
+
+import lk.ijse.finalproject.dto.CustomerDto;
+import lk.ijse.finalproject.util.CrudUtil;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+public class CustomerModel {
+    public boolean saveCustomer(CustomerDto customerDto) throws SQLException {
+        return CrudUtil.execute("INSERT INTO customer VALUES(?,?,?,?)",
+                customerDto.getCustomerId(),
+                customerDto.getCustomerName(),
+                customerDto.getCustomerContact(),
+                customerDto.getCustomerAddresss()
+                );
+    }
+    public boolean updateCustomer(CustomerDto customerDto) throws SQLException {
+       return CrudUtil.execute("UPDATE customer SET customer_name = ? , customer_contact = ? , customer_address = ? WHERE customer_id = ?",
+               customerDto.getCustomerName(),
+               customerDto.getCustomerContact(),
+               customerDto.getCustomerAddresss(),
+               customerDto.getCustomerId()
+               );
+    }
+    public boolean deleteCustomer(String customerId) throws SQLException {
+        return CrudUtil.execute("DELETE FROM customer WHERE customer_id = ?",
+                customerId);
+    }
+    public CustomerDto searchCustomer(String customerId) throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer WHERE customer_id = ?",
+                customerId
+        );
+        if (resultSet.next()) {
+            CustomerDto dto = new CustomerDto(
+                    resultSet.getString("customerId"),
+                    resultSet.getString("customerName"),
+                    resultSet.getString("customerContact"),
+                    resultSet.getString("customerAddress")
+            );
+            return dto;
+        }
+        return null;
+    }
+    public ArrayList<CustomerDto> getAllCustomer() throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer");
+        ArrayList<CustomerDto> dtos = new ArrayList<>();
+
+        while (resultSet.next()) {
+            CustomerDto dto = new CustomerDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            );
+            dtos.add(dto);
+        }
+        return dtos;
+    }
+    public String getNextCustomerId() throws SQLException , ClassNotFoundException{
+        ResultSet resultSet = CrudUtil.execute("SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1");
+        char tableChartacter = 'C';
+
+        if(resultSet.next()){
+            String lastId = resultSet.getString(1);
+            String lastIdNumberString = lastId.substring(1);
+            int lastIdNumber = Integer.parseInt(lastIdNumberString);
+            int nextIdNumber = lastIdNumber + 1;
+            String nextIdString = String.format(tableChartacter + "%03d" , nextIdNumber);
+
+            return nextIdString;
+        }
+        return tableChartacter + "001";
+    }
+}
