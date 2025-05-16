@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.tm.CustomerTm;
 import lk.ijse.finalproject.model.CustomerModel;
@@ -38,6 +39,7 @@ public class CustomerPageController implements Initializable {
     private final String namePattern = "^[A-Za-z ]+$";
     private final String contactPattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
     private final String addressPattern = "^[A-Za-z ]+$";
+    public AnchorPane ancCustomerPage;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -197,6 +199,27 @@ public class CustomerPageController implements Initializable {
             btnSave.setDisable(true);
             btnUpdate.setDisable(false);
             btnDelete.setDisable(false);
+        }
+    }
+
+    public void goToDashboard(MouseEvent mouseEvent) {
+        navigateTo("/view/Dashboard.fxml");
+
+    }
+    private void navigateTo(String path) {
+        try {
+            ancCustomerPage.getChildren().clear();
+
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource(path));
+
+            anchorPane.prefWidthProperty().bind(ancCustomerPage.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancCustomerPage.heightProperty());
+
+           ancCustomerPage.getChildren().add(anchorPane);
+
+        }catch (Exception e){
+            new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
+            e.printStackTrace();
         }
     }
 }

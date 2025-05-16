@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject.controller.DashboardPageController">
+<AnchorPane fx:id="ancDashboard" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject.controller.DashboardPageController">
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="760.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #fff;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
@@ -23,6 +23,6 @@
             </Button>
          </children>
       </VBox>
-      <AnchorPane fx:id="ancDashboard" layoutX="339.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="339.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane layoutX="339.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="339.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
    </children>
 </AnchorPane>

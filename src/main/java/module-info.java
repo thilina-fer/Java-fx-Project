@@ -2,7 +2,7 @@ module lk.ijse.finalproject {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
-    requires lombok;
+    requires   lombok;
 
 
     opens lk.ijse.finalproject.controller to javafx.fxml;
