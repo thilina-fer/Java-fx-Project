@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -10,7 +11,7 @@
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="760.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #fff;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Customer">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Customer">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -21,8 +22,27 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToSupplierPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Supplier">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToItemPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Item">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
-      <AnchorPane layoutX="339.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="339.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0" />
+      <AnchorPane layoutX="339.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="339.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <StackPane layoutX="244.0" layoutY="305.0" prefHeight="150.0" prefWidth="200.0" />
+         </children></AnchorPane>
    </children>
 </AnchorPane>

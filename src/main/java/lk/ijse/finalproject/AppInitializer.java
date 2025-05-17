@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class AppInitializer extends Application {
     public static void main(String[] args) {
         launch(args);
@@ -13,8 +15,8 @@ public class AppInitializer extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent parent = FXMLLoader.load(getClass().getResource("/view/FirstPage.fxml"));
+    public void start(Stage primaryStage) throws IOException {
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Final Project");

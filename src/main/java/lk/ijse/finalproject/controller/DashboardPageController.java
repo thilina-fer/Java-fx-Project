@@ -13,9 +13,6 @@ public class DashboardPageController implements Initializable {
 
     public AnchorPane ancDashboard;
 
-    public void btnCustomerOnAction(ActionEvent actionEvent) { navigateTo("/view/CustomerPage.fxml");
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -36,4 +33,10 @@ public class DashboardPageController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    public void btnGoToSupplierPageOnAction(ActionEvent actionEvent) { navigateTo("/view/SupplierPage.fxml"); }
+
+    public void btnCustomerOnAction(ActionEvent actionEvent) { navigateTo("/view/CustomerPage.fxml"); }
+
+    public void btnGoToItemPageOnAction(ActionEvent actionEvent) { navigateTo("/view/ItemPage.fxml"); }
 }

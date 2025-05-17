@@ -1,0 +1,296 @@
+package lk.ijse.finalproject.controller;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject.dto.CustomerDto;
+import lk.ijse.finalproject.dto.ItemDto;
+import lk.ijse.finalproject.dto.tm.CustomerTm;
+import lk.ijse.finalproject.dto.tm.ItemTm;
+import lk.ijse.finalproject.model.ItemModel;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
+public class ItemPageController implements Initializable {
+
+    public Label lblItemId;
+    public TextField txtName;
+    public TextField txtQuantity;
+    public TextField txtBuyingPrice;
+    public TextField txtSellingPrice;
+
+
+    public TableView<ItemTm> tblItem;
+    public TableColumn<ItemTm , String> colId;
+    public TableColumn<ItemTm , String> colName;
+    public TableColumn<ItemTm , Integer> colQuantity;
+    public TableColumn<ItemTm , Double> colBuyPrice;
+    public TableColumn<ItemTm , Double> colSellPrice;
+
+    private final ItemModel itemModel = new ItemModel();
+
+    public Button btnSave;
+    public Button btnUpdate;
+    public Button btnDelete;
+    public Button btnReset;
+
+    private final String quantityPattern = "^\\d+$";
+    private final String buyingPricePattern = "^\\d+(\\.\\d{1,2})?$";
+    private final String sellingPricePattern = "^\\d+(\\.\\d{1,2})?$";
+    public AnchorPane ancItemPage;
+    public TextField searchField;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+            colId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+            colName.setCellValueFactory(new PropertyValueFactory<>("itemName"));
+            colQuantity.setCellValueFactory(new PropertyValueFactory<>("Quantity"));
+            colBuyPrice.setCellValueFactory(new PropertyValueFactory<>("BuyPrice"));
+            colSellPrice.setCellValueFactory(new PropertyValueFactory<>("SellPrice"));
+
+            try {
+                resetPage();
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR,"Something went wrong").show();
+            }
+    }
+
+    private void loadTableData() throws SQLException, ClassNotFoundException {
+        tblItem.setItems(FXCollections.observableArrayList(
+                itemModel.getAllItem().stream()
+                        .map(itemDto -> new ItemTm(
+                                itemDto.getItemId(),
+                                itemDto.getItemName(),
+                                itemDto.getQuantity(),
+                                itemDto.getBuyPrice(),
+                                itemDto.getSellPrice()
+                        )).toList()
+        ));
+    }
+    private void resetPage() {
+        try {
+            loadTableData();
+            loadNextId();
+
+            btnSave.setDisable(false);
+            btnUpdate.setDisable(true);
+            btnDelete.setDisable(true);
+
+            txtName.setText("");
+            txtQuantity.setText("");
+            txtBuyingPrice.setText("");
+            txtSellingPrice.setText("");
+
+        }catch (Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+        }
+    }
+
+    public void btnSaveOnAction(ActionEvent actionEvent) {
+        String itemId = lblItemId.getText();
+        String itemName = txtName.getText();
+        String qty = txtQuantity.getText();
+        String buyingPrice = txtBuyingPrice.getText();
+        String sellingPrice = txtSellingPrice.getText();
+
+        boolean isValidQuantity = qty.matches(quantityPattern);
+        boolean isValidBuyPrice = buyingPrice.matches(buyingPricePattern);
+        boolean isValidSellPrice = sellingPrice.matches(sellingPricePattern);
+
+        txtName.setStyle(txtName.getStyle() + ";-fx-border-color: #7367F0;");
+        txtQuantity.setStyle(txtQuantity.getStyle() + ";-fx-border-color: #7367F0");
+        txtBuyingPrice.setStyle(txtBuyingPrice.getStyle() + ";-fx-border-color: #7367F0");
+        txtSellingPrice.setStyle(txtSellingPrice.getStyle() + ";-fx-border-color: #7367F0");
+
+        if (!isValidQuantity) txtName.setStyle(txtName.getStyle() + ";-fx-border-color: red;");
+        if (!isValidBuyPrice) txtBuyingPrice.setStyle(txtBuyingPrice.getStyle() + ";-fx-border-color: red;");
+        if (!isValidSellPrice) txtSellingPrice.setStyle(txtSellingPrice.getStyle() + ";-fx-border-color: red;");
+
+        int presedQuantity = Integer.parseInt(qty);
+        double presedBuyPrice = Double.parseDouble(buyingPrice);
+        double presedSellPrice = Double.parseDouble(sellingPrice);
+
+        ItemDto itemDto = new ItemDto(
+                itemId,
+                itemName,
+                presedQuantity,
+                presedBuyPrice,
+                presedSellPrice
+        );
+
+        if (isValidQuantity && isValidBuyPrice && isValidSellPrice){
+            try {
+                boolean isSaved = itemModel.saveItem(itemDto);
+
+                if (isSaved){
+                    resetPage();
+                    new Alert(Alert.AlertType.INFORMATION,"Item Saved Successfully").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR,"Save Failed").show();
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+            }
+        }
+    }
+
+    public void btnUpdateOnAction(ActionEvent actionEvent) {
+        String itemId = lblItemId.getText();
+        String itemName = txtName.getText();
+        String qty = txtQuantity.getText();
+        String buyingPrice = txtBuyingPrice.getText();
+        String sellingPrice = txtSellingPrice.getText();
+
+        int presedQuantity = Integer.parseInt(qty);
+        double presedBuyPrice = Double.parseDouble(buyingPrice);
+        double presedSellPrice = Double.parseDouble(sellingPrice);
+
+        ItemDto itemDto = new ItemDto(
+                itemId,
+                itemName,
+                presedQuantity,
+                presedBuyPrice,
+                presedSellPrice
+        );
+
+        try {
+            boolean isUpdated = itemModel.updateItem(itemDto);
+
+            if (isUpdated){
+                resetPage();
+                new Alert(Alert.AlertType.INFORMATION,"Item Updated Successfully").show();
+            }else {
+                new Alert(Alert.AlertType.ERROR,"Update Failedd").show();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
+        }
+    }
+
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION,
+                "Are you sure ? ",
+                ButtonType.YES,
+                ButtonType.NO
+        );
+
+        Optional<ButtonType> response = alert.showAndWait();
+
+        if (response.isPresent() && response.get() == ButtonType.YES) {
+            String itemId = lblItemId.getText();
+            try {
+                boolean isDeleted = itemModel.deleteItem(itemId);
+                if (isDeleted) {
+                    resetPage();
+                    new Alert(Alert.AlertType.INFORMATION, "Item Deleted Successfully").show();
+                } else {
+                    new Alert(Alert.AlertType.ERROR, "Delete Failed").show();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Something went wrong!").show();
+            }
+        }
+    }
+
+    public void btnResetOnAction(ActionEvent actionEvent) {
+    }
+
+    private void loadNextId() throws ClassNotFoundException , SQLException{
+      String nextId = itemModel.getNextItemId();
+      lblItemId.setText(nextId);
+    }
+
+    public void onClickTable(MouseEvent mouseEvent) {
+        ItemTm selectedItem = tblItem.getSelectionModel().getSelectedItem();
+
+        if (selectedItem != null){
+            lblItemId.setText(selectedItem.getItemId());
+            txtName.setText(selectedItem.getItemName());
+            txtQuantity.setText(String.valueOf(selectedItem.getQuantity()));
+            txtBuyingPrice.setText(String.valueOf(selectedItem.getBuyPrice()));
+            txtSellingPrice.setText(String.valueOf(selectedItem.getSellPrice()));
+
+            btnSave.setDisable(true);
+            btnUpdate.setDisable(false);
+            btnDelete.setDisable(false);
+
+        }
+    }
+
+    public void goToDashboard(MouseEvent mouseEvent) {
+        navigateTo("/view/Dashboard.fxml");
+    }
+
+    private void navigateTo(String path) {
+        try {
+            ancItemPage.getChildren().clear();
+
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource(path));
+
+            anchorPane.prefWidthProperty().bind(ancItemPage.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancItemPage.heightProperty());
+
+            ancItemPage.getChildren().add(anchorPane);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
+            e.printStackTrace();
+        }
+    }
+
+    public void search(KeyEvent keyEvent) {
+        searchField.getText();
+        String phoneNum = searchField.getText();
+
+        if (phoneNum.equals("")) {
+            try {
+                loadTableData();
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            } catch (ClassNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            loadSearchResults(phoneNum);
+        }
+    }
+    private void loadSearchResults(String phoneNum) {
+        try {
+            ArrayList<ItemDto> contacts = itemModel.getItemDetailsFromName(phoneNum);
+            if (contacts == null) {
+                tblItem.setItems(FXCollections.observableArrayList(new ArrayList<>()));
+            } else {
+               tblItem.setItems(FXCollections.observableArrayList(
+                       itemModel.getItemDetailsFromName(phoneNum).stream()
+                                .map(itemDto -> new ItemTm(
+                                        itemDto.getItemId(),
+                                        itemDto.getItemName(),
+                                        itemDto.getQuantity(),
+                                        itemDto.getBuyPrice(),
+                                        itemDto.getSellPrice()
+                                )).toList()
+                ));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Error when display results").show();
+        }
+    }
+}
+

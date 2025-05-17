@@ -73,4 +73,17 @@ public class CustomerModel {
         }
         return tableChartacter + "001";
     }
+    public ArrayList<CustomerDto> getCustomerDetailsFromContact(String phoneNum) throws SQLException {
+        ResultSet rst = CrudUtil.execute("SELECT * FROM customer WHERE customer_contact = ?", phoneNum);
+        ArrayList<CustomerDto> dtos = new ArrayList<>();
+        if (rst.next()) {
+            dtos.add(new CustomerDto(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4)));
+        }
+        return dtos;
+    }
+
 }
