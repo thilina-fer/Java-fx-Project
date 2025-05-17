@@ -190,7 +190,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" prefHeight="35.0" prefWidth="330.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(to right, #D3CCE3, #E9E4F0);;" text="Reset" VBox.vgrow="ALWAYS">
+                              <Button fx:id="btnReset" mnemonicParsing="false" onAction="#btnResetOnAction" prefHeight="35.0" prefWidth="330.0" style="-fx-background-radius: 20; -fx-background-color: linear-gradient(to right, #D3CCE3, #E9E4F0);;" text="Clean" VBox.vgrow="ALWAYS">
                                  <font>
                                     <Font name="Arial Bold" size="15.0" />
                                  </font>
@@ -200,7 +200,7 @@
                                  <graphic>
                                     <ImageView fitHeight="23.0" fitWidth="26.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../images/794cd1f7e2e73ae1634e82e12a26f1b9-removebg-preview.png" />
+                                          <Image url="@../images/78b60ca8443c93f380ca412d27251747-removebg-preview.png" />
                                        </image>
                                     </ImageView>
                                  </graphic>

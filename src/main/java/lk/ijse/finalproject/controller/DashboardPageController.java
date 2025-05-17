@@ -39,4 +39,7 @@ public class DashboardPageController implements Initializable {
     public void btnCustomerOnAction(ActionEvent actionEvent) { navigateTo("/view/CustomerPage.fxml"); }
 
     public void btnGoToItemPageOnAction(ActionEvent actionEvent) { navigateTo("/view/ItemPage.fxml"); }
+
+    public void btnGoToEmployeePageOnAction(ActionEvent actionEvent) { navigateTo("/view/EmployeePage.fxml");
+    }
 }

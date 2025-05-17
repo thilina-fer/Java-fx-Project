@@ -28,21 +28,7 @@ public class CustomerModel {
         return CrudUtil.execute("DELETE FROM customer WHERE customer_id = ?",
                 customerId);
     }
-    public CustomerDto searchCustomer(String customerId) throws SQLException {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer WHERE customer_id = ?",
-                customerId
-        );
-        if (resultSet.next()) {
-            CustomerDto dto = new CustomerDto(
-                    resultSet.getString("customerId"),
-                    resultSet.getString("customerName"),
-                    resultSet.getString("customerContact"),
-                    resultSet.getString("customerAddress")
-            );
-            return dto;
-        }
-        return null;
-    }
+
     public ArrayList<CustomerDto> getAllCustomer() throws SQLException {
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer");
         ArrayList<CustomerDto> dtos = new ArrayList<>();

@@ -40,7 +40,6 @@ public class SupplierPageController implements Initializable {
     public Button btnReset;
 
     private final String namePattern = "^[A-Za-z ]+$";
-    //private final String contactPattern = "^(\\d+)||((\\d+\\.)(\\d){2})$";
     private final String addressPattern = "^[A-Z][a-z]+(?: [A-Z][a-z]+)*$";
     public TextField searchField;
 
@@ -80,9 +79,9 @@ public class SupplierPageController implements Initializable {
             btnDelete.setDisable(true);
             btnUpdate.setDisable(true);
 
-            txtName.setText("");
-            txtContact.setText("");
-            txtAddress.setText("");
+            txtName.setText(null);
+            txtContact.setText(null);
+            txtAddress.setText(null);
         }catch (Exception e){
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR,"Something went wrong!").show();
@@ -184,6 +183,7 @@ public class SupplierPageController implements Initializable {
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) {
+        resetPage();
     }
 
     private void loadNextId() throws SQLException, ClassNotFoundException {

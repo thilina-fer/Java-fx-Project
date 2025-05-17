@@ -88,10 +88,10 @@ public class ItemPageController implements Initializable {
             btnUpdate.setDisable(true);
             btnDelete.setDisable(true);
 
-            txtName.setText("");
-            txtQuantity.setText("");
-            txtBuyingPrice.setText("");
-            txtSellingPrice.setText("");
+            txtName.setText(null);
+            txtQuantity.setText(null);
+            txtBuyingPrice.setText(null);
+            txtSellingPrice.setText(null);
 
         }catch (Exception e){
             e.printStackTrace();

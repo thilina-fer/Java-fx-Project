@@ -82,9 +82,9 @@ public class CustomerPageController implements Initializable {
             btnDelete.setDisable(true);
             btnUpdate.setDisable(true);
 
-            txtName.setText("");
-            txtContact.setText("");
-            txtAddress.setText("");
+            txtName.setText(null);
+            txtContact.setText(null);
+            txtAddress.setText(null);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -187,6 +187,7 @@ public class CustomerPageController implements Initializable {
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) {
+        resetPage();
     }
 
     private void loadNextId() throws SQLException, ClassNotFoundException {
