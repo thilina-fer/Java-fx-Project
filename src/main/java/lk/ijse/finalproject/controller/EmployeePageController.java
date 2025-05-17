@@ -30,12 +30,14 @@ public class EmployeePageController implements Initializable {
     public TextField txtAddress;
     public TextField txtAge;
     public TextField txtSalary;
+    public TextField txtNic;
 
     public TableView<EmployeeTm> tblEmployee;
     public TableColumn<EmployeeTm , String> colId;
     public TableColumn<EmployeeTm , String> colName;
     public TableColumn<EmployeeTm , String> colContact;
     public TableColumn<EmployeeTm , String> colAddress;
+    public TableColumn<EmployeeTm , String> colNic;
     public TableColumn<EmployeeTm , Integer> colAge;
     public TableColumn<EmployeeTm , Double> colSalary;
 
@@ -55,6 +57,7 @@ public class EmployeePageController implements Initializable {
         colName.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
         colContact.setCellValueFactory(new PropertyValueFactory<>("employeeContact"));
         colAddress.setCellValueFactory(new PropertyValueFactory<>("employeeAddress"));
+        colNic.setCellValueFactory(new PropertyValueFactory<>("employeeNic"));
         colAge.setCellValueFactory(new PropertyValueFactory<>("employeeAge"));
         colSalary.setCellValueFactory(new PropertyValueFactory<>("salary"));
 
@@ -73,6 +76,7 @@ public class EmployeePageController implements Initializable {
                                 employeeDto.getEmployeeName(),
                                 employeeDto.getEmployeeContact(),
                                 employeeDto.getEmployeeAddress(),
+                                employeeDto.getEmployeeNic(),
                                 employeeDto.getEmployeeAge(),
                                 employeeDto.getSalary()
                         )).toList()
@@ -103,20 +107,24 @@ public class EmployeePageController implements Initializable {
         String employeeName = txtName.getText();
         String employeeContact = txtContact.getText();
         String employeeAddress = txtAddress.getText();
+        String employeeNic = txtNic.getText();
         String employeeAge = txtAge.getText();
         String employeeSalary = txtSalary.getText();
 
         boolean isValidContact = employeeContact.length() == 10;
+        boolean isValidNic = employeeNic.length() == 12 && employeeNic.charAt(9) == '-';
         boolean isValidAge = employeeAge.matches(agePattern);
         boolean isValidSalary = employeeSalary.matches(salaryPattern);
 
         txtName.setStyle(txtName.getStyle()+";-fx-border-color: #7367F0;");
         txtContact.setStyle(txtContact.getStyle()+";-fx-border-color: #7367F0");
         txtAddress.setStyle(txtAddress.getStyle()+";-fx-border-color: #7367F0");
+        txtNic.setStyle(txtNic.getStyle()+";-fx-border-color: #7367F0");
         txtAge.setStyle(txtAge.getStyle()+";-fx-border-color: #7367F0");
         txtSalary.setStyle(txtSalary.getStyle()+";-fx-border-color: #7367F0");
 
         if (!isValidContact) txtContact.setStyle(txtContact.getStyle()+";-fx-border-color: red;");
+        if (!isValidNic) txtNic.setStyle(txtNic.getStyle()+";-fx-border-color: red;");
         if (!isValidAge) txtAge.setStyle(txtAge.getStyle()+";-fx-border-color: red;");
         if (!isValidSalary) txtSalary.setStyle(txtSalary.getStyle()+";-fx-border-color: red;");
 
@@ -128,6 +136,7 @@ public class EmployeePageController implements Initializable {
                 employeeName,
                 employeeContact,
                 employeeAddress,
+                employeeNic,
                 parsedAge,
                 parsedSalary
         );
@@ -153,6 +162,7 @@ public class EmployeePageController implements Initializable {
         String employeeName = txtName.getText();
         String employeeContact = txtContact.getText();
         String employeeAddress = txtAddress.getText();
+        String employeeNic = txtNic.getText();
         String employeeAge = txtAge.getText();
         String employeeSalary = txtSalary.getText();
 
@@ -164,6 +174,7 @@ public class EmployeePageController implements Initializable {
                 employeeName,
                 employeeContact,
                 employeeAddress,
+                employeeNic,
                 parsedAge,
                 parsedSalary
         );
@@ -225,6 +236,7 @@ public class EmployeePageController implements Initializable {
         txtName.setText(selectedItem.getEmployeeName());
         txtContact.setText(selectedItem.getEmployeeContact());
         txtAddress.setText(selectedItem.getEmployeeAddress());
+        txtNic.setText(selectedItem.getEmployeeNic());
         txtAge.setText(String.valueOf(selectedItem.getEmployeeAge()));
         txtSalary.setText(String.valueOf(selectedItem.getSalary()
 
@@ -264,6 +276,7 @@ public class EmployeePageController implements Initializable {
                                         employeeDto.getEmployeeName(),
                                         employeeDto.getEmployeeContact(),
                                         employeeDto.getEmployeeAddress(),
+                                        employeeDto.getEmployeeNic(),
                                         employeeDto.getEmployeeAge(),
                                         employeeDto.getSalary()
                                 )).toList()
@@ -294,5 +307,9 @@ public class EmployeePageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
             e.printStackTrace();
         }
+    }
+
+    public void goToEmployeeAttendancePage(MouseEvent mouseEvent) {
+        navigateTo("/view/EmployeeAttendance.fxml");
     }
 }

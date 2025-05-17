@@ -13,6 +13,7 @@ public class EmployeeTm {
     private String employeeName;
     private String employeeContact;
     private String employeeAddress;
+    private String employeeNic;
     private int employeeAge;
     private double salary;
 }

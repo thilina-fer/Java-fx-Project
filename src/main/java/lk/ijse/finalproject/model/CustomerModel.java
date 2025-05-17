@@ -71,5 +71,4 @@ public class CustomerModel {
         }
         return dtos;
     }
-
 }

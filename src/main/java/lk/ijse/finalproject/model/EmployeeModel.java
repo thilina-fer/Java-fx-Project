@@ -11,30 +11,32 @@ import java.util.ArrayList;
 public class EmployeeModel {
     public boolean saveEmployee(EmployeeDto employeeDto) throws ClassNotFoundException , SQLException {
         return CrudUtil.execute(
-                "INSERT INTO employee VALUES(?,?,?,?,?,?)",
+                "INSERT INTO employee VALUES(?,?,?,?,?,?,?)",
                 employeeDto.getEmployeeId(),
                 employeeDto.getEmployeeName(),
                 employeeDto.getEmployeeContact(),
                 employeeDto.getEmployeeAddress(),
+                employeeDto.getEmployeeNic(),
                 employeeDto.getEmployeeAge(),
                 employeeDto.getSalary()
         );
     }
     public boolean updateEmployee(EmployeeDto employeeDto) throws ClassNotFoundException , SQLException{
         return CrudUtil.execute(
-                "UPDATE employee SET emp_name = ? , emp_contact = ? , emp_address = ? , emp_age = ? , salary = ? WHERE emp_id = ?",
+                "UPDATE employee SET emp_id = ? , emp_name = ? , emp_contact = ? , emp_address = ? , emp_age = ? , salary = ? WHERE emp_nic = ?",
+                employeeDto.getEmployeeId(),
                 employeeDto.getEmployeeName(),
                 employeeDto.getEmployeeContact(),
                 employeeDto.getEmployeeAddress(),
                 employeeDto.getEmployeeAge(),
                 employeeDto.getSalary(),
-                employeeDto.getEmployeeId()
+                employeeDto.getEmployeeNic()
 
         );
     }
-    public boolean deleteEmployee(String empId) throws ClassNotFoundException ,SQLException{
-        return CrudUtil.execute("DELETE FROM employee WHERE emp_id = ?",
-                empId);
+    public boolean deleteEmployee(String empNic) throws ClassNotFoundException ,SQLException{
+        return CrudUtil.execute("DELETE FROM employee WHERE emp_nic = ?",
+                empNic);
     }
     public ArrayList<EmployeeDto> getAllEmployee() throws ClassNotFoundException , SQLException{
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM employee");
@@ -45,8 +47,9 @@ public class EmployeeModel {
                     resultSet.getString(2),
                     resultSet.getString(3),
                     resultSet.getString(4),
-                    resultSet.getInt(5),
-                    resultSet.getDouble(6)
+                    resultSet.getString(5),
+                    resultSet.getInt(6),
+                    resultSet.getDouble(7)
             );
             employeeDtoArrayList.add(employeeDto);
         }
@@ -67,7 +70,7 @@ public class EmployeeModel {
         return tableChartacter + "001";
     }
     public ArrayList<EmployeeDto> getEmployeeDetailsFromContact(String phoneNum) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM employee WHERE emp_contact = ?", phoneNum);
+        ResultSet rst = CrudUtil.execute("SELECT * FROM employee WHERE emp_contact = ? OR emp_nic", phoneNum);
         ArrayList<EmployeeDto> dtos = new ArrayList<>();
         if (rst.next()) {
             dtos.add(new EmployeeDto(
@@ -75,8 +78,9 @@ public class EmployeeModel {
                     rst.getString(2),
                     rst.getString(3),
                     rst.getString(4),
-                    rst.getInt(5),
-                    rst.getDouble(6)
+                    rst.getString(5),
+                    rst.getInt(6),
+                    rst.getDouble(7)
                     ));
         }
         return dtos;
