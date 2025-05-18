@@ -223,9 +223,7 @@ public class EmployeeAttendancePageController implements Initializable {
         }
     }
 
-    public void goToDashboard(MouseEvent mouseEvent) {
-        navigateTo("/view/EmployeePage.fxml");
-    }
+
     private void navigateTo(String path) {
         try {
             ancAttendancePage.getChildren().clear();

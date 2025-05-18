@@ -16,11 +16,10 @@ public class AppInitializer extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        Parent parent = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
         Scene scene = new Scene(parent);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Final Project");
         primaryStage.show();
-
     }
 }

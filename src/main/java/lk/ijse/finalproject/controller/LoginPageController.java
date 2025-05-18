@@ -9,6 +9,9 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.finalproject.util.CrudUtil;
 
@@ -22,8 +25,9 @@ public class LoginPageController {
 
     private final String userNamePattern = "^[A-Za-z0-9_ ]{3,}$";
     private final String passwordPattern = "^[A-Za-z0-9@#$%^&+=]{6,}$";
+    public AnchorPane ancSignIn;
 
-    private void initialize(){
+    private void initialize() {
         txtUsername.textProperty().addListener((observable, oldValue, newValue) -> validFields());
         txtPassword.textProperty().addListener((observable, oldValue, newValue) -> validFields());
 
@@ -37,8 +41,10 @@ public class LoginPageController {
         txtUsername.setStyle("-fx-border-color: #7367F0; -fx-border-radius: 12px; -fx-background-radius: 12px;");
         txtPassword.setStyle("-fx-border-color: #7367F0; -fx-border-radius: 12px; -fx-background-radius: 12px;");
 
-        if (!isValidUsername) txtUsername.setStyle("-fx-border-color: red; -fx-border-radius: 12px; -fx-background-radius: 12px;");
-        if (!isValidPassword) txtPassword.setStyle("-fx-border-color: red; -fx-border-radius: 12px; -fx-background-radius: 12px;");
+        if (!isValidUsername)
+            txtUsername.setStyle("-fx-border-color: red; -fx-border-radius: 12px; -fx-background-radius: 12px;");
+        if (!isValidPassword)
+            txtPassword.setStyle("-fx-border-color: red; -fx-border-radius: 12px; -fx-background-radius: 12px;");
 
         btnSignUp.setDisable(!(isValidUsername && isValidPassword));
     }
@@ -53,23 +59,23 @@ public class LoginPageController {
         }
         try {
             ResultSet resultSet = CrudUtil.execute("SELECT * FROM user WHERE user_name = ? AND password = ?",
-                    inputUsername,inputPassword
+                    inputUsername, inputPassword
             );
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 try {
                     Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
                     Stage dashboardStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                     dashboardStage.setScene(new Scene(dashboardRoot));
                     dashboardStage.setTitle("Alpha Modifications");
                     dashboardStage.show();
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                     new Alert(Alert.AlertType.ERROR, "Something went wrong", ButtonType.OK).show();
                 }
-            }else {
+            } else {
                 new Alert(Alert.AlertType.ERROR, "Invalid Username or Password", ButtonType.OK).show();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Login Fail", ButtonType.OK).show();
         }
@@ -83,9 +89,30 @@ public class LoginPageController {
             dashBoardStage.setTitle("Alpha Modifications");
             dashBoardStage.setResizable(true);
             dashBoardStage.show();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "SignUp Failed", ButtonType.OK).show();
         }
+    }
+
+    private void navigateTo(String path) {
+        try {
+            ancSignIn.getChildren().clear();
+
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource(path));
+
+            anchorPane.prefWidthProperty().bind(ancSignIn.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancSignIn.heightProperty());
+
+            ancSignIn.getChildren().add(anchorPane);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
+            e.printStackTrace();
+        }
+    }
+
+    public void goToforgotPassword(MouseEvent mouseEvent) {
+        navigateTo("/view/FogotPasswordPage.fxml");
     }
 }
