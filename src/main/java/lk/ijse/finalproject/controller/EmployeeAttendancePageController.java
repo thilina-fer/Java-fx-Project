@@ -279,7 +279,11 @@ public class EmployeeAttendancePageController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Error when display results").show();
             }
         }
+
+    public void goToDashboard(MouseEvent mouseEvent) {
+        navigateTo("/view/Dashboard.fxml");
     }
+}
 
 
 

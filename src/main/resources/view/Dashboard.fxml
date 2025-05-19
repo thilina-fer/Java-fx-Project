@@ -13,7 +13,7 @@
    <children>
       <VBox layoutX="14.0" layoutY="14.0" prefHeight="760.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #fff;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Customer">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Customer">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

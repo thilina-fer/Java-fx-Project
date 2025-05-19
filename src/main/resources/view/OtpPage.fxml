@@ -49,7 +49,7 @@
                <children>
                   <TextField prefHeight="50.0" prefWidth="50.0">
                      <HBox.margin>
-                        <Insets left="190.0" />
+                        <Insets left="150.0" />
                      </HBox.margin>
                   </TextField>
                   <TextField prefHeight="50.0" prefWidth="50.0">
@@ -64,7 +64,7 @@
                   </TextField>
                   <TextField prefHeight="50.0" prefWidth="50.0">
                      <HBox.margin>
-                        <Insets left="50.0" right="170.0" />
+                        <Insets left="50.0" right="150.0" />
                      </HBox.margin>
                   </TextField>
                </children>
