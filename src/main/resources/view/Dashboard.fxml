@@ -48,6 +48,14 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchaseOrderPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Purchase Order">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="Arial Bold" size="16.0" />
+               </font>
+            </Button>
          </children>
       </VBox>
       <AnchorPane layoutX="339.0" layoutY="20.0" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff; -fx-background-radius: 20;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="339.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">

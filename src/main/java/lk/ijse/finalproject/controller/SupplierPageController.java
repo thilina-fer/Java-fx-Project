@@ -9,7 +9,9 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.dto.SupplierDto;
+import lk.ijse.finalproject.dto.tm.ItemTm;
 import lk.ijse.finalproject.dto.tm.SupplierTm;
 import lk.ijse.finalproject.model.SupplierModel;
 
@@ -228,21 +230,34 @@ public class SupplierPageController implements Initializable {
 
     @FXML
     private void search() {
-        searchField.getText();
-        String phoneNum = searchField.getText();
-
-        if (phoneNum.equals("")){
+        String searchText = searchField.getText();
+        if (searchText.isEmpty()){
             try {
                 loadTableData();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Faild to load Suppliers").show();
             }
-        } else {
-            loadSearchResults(phoneNum);
+        }else {
+            try {
+                ArrayList<SupplierDto> customerList = supplierModel.searchSupplier(searchText);
+                tblSupplier.setItems(FXCollections.observableArrayList(
+                        customerList.stream()
+                                .map(supplierDto -> new SupplierTm(
+                                        supplierDto.getSupplierId(),
+                                        supplierDto.getSupplierName(),
+                                        supplierDto.getSupplierContact(),
+                                        supplierDto.getSupplierAddress()
+                                )).toList()
+                ));
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to search suppliers").show();
+            }
         }
-    }
 
-    private void loadSearchResults(String phoneNum) {
+
+  /*  private void loadSearchResults(String phoneNum) {
         try {
             ArrayList<SupplierDto> contacts = supplierModel.getSupplierDetailsFromContact(phoneNum);
             if (contacts == null){
@@ -261,7 +276,7 @@ public class SupplierPageController implements Initializable {
         } catch (SQLException e) {
             new Alert(Alert.AlertType.ERROR, "Error when display results").show();
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void goToSupplierOrderPage(MouseEvent mouseEvent) {

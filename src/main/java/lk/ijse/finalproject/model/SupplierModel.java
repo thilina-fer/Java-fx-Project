@@ -1,5 +1,6 @@
 package lk.ijse.finalproject.model;
 
+import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.dto.SupplierDto;
 import lk.ijse.finalproject.util.CrudUtil;
 
@@ -28,21 +29,7 @@ public class SupplierModel {
         return CrudUtil.execute("DELETE FROM supplier WHERE supplier_id = ?",
                 supplierId);
     }
-    public SupplierDto searchSupplier(String supplierId) throws SQLException {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM supplier",
-                supplierId);
-        if (resultSet.next()) {
-            SupplierDto supplierDto = new SupplierDto(
-                    resultSet.getString("supplierId"),
-                    resultSet.getString("supplierName"),
-                    resultSet.getString("supplierContact"),
-                    resultSet.getString("supplierAddress")
 
-            );
-            return supplierDto;
-        }
-        return null;
-    }
     public ArrayList<SupplierDto> getAllSuppliers() throws SQLException {
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM supplier");
         ArrayList<SupplierDto> supplierDtos = new ArrayList<>();
@@ -73,7 +60,7 @@ public class SupplierModel {
         return tableChartacter + "001";
     }
 
-    public ArrayList<SupplierDto> getSupplierDetailsFromContact(String phoneNum) throws SQLException {
+    /*public ArrayList<SupplierDto> getSupplierDetailsFromContact(String phoneNum) throws SQLException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM supplier WHERE supplier_contact = ?", phoneNum);
         ArrayList<SupplierDto> dtos = new ArrayList<>();
         if (rst.next()) {
@@ -85,5 +72,22 @@ public class SupplierModel {
         }
         return dtos;
     }
+*/
+    public ArrayList<SupplierDto> searchSupplier(String searchText) throws SQLException {
+        ArrayList<SupplierDto> dtos = new ArrayList<>();
+        String sql = "SELECT * FROM supplier WHERE supplier_id LIKE ? OR supplier_name LIKE ? OR supplier_contact LIKE ? OR supplier_address LIKE ? ";
+        String pattern = "%" + searchText + "%";
+        ResultSet resultSet = CrudUtil.execute(sql, pattern, pattern, pattern, pattern);
 
+        while (resultSet.next()) {
+            SupplierDto supplierDto = new SupplierDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            );
+            dtos.add(supplierDto);
+        }
+        return dtos;
+    }
 }

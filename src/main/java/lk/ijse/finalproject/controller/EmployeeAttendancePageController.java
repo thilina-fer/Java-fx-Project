@@ -9,7 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.EmployeeAttendanceDto;
+import lk.ijse.finalproject.dto.EmployeeDto;
+import lk.ijse.finalproject.dto.tm.CustomerTm;
 import lk.ijse.finalproject.dto.tm.EmployeeAttendanceTm;
 import lk.ijse.finalproject.model.EmployeeAttendanceModel;
 
@@ -242,22 +245,34 @@ public class EmployeeAttendancePageController implements Initializable {
     }
 
     public void search(KeyEvent keyEvent) {
-        searchField.getText();
-        String nic = searchField.getText();
-
-        if (nic.equals("")) {
+        String searchText = searchField.getText();
+        if (searchText.isEmpty()){
             try {
                 loadTableData();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Faild to load Attendance").show();
             }
-        } else {
-            loadSearchResults(nic);
+        }else {
+            try {
+                ArrayList<EmployeeAttendanceDto> employeeDtoArrayList = employeeAttendanceModel.searchAttendane(searchText);
+                tblAttendance.setItems(FXCollections.observableArrayList(
+                        employeeDtoArrayList.stream()
+                                .map(employeeAttendanceDto -> new EmployeeAttendanceTm(
+                                        employeeAttendanceDto.getAttendanceId(),
+                                        employeeAttendanceDto.getEmployeeNic(),
+                                        employeeAttendanceDto.getDate(),
+                                        employeeAttendanceDto.getAttendTime(),
+                                        employeeAttendanceDto.getDuration()
+                                )).toList()
+                ));
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to search attendance").show();
+            }
         }
     }
-        private void loadSearchResults(String nic) {
+        /*private void loadSearchResults(String nic) {
             try {
                 ArrayList<EmployeeAttendanceDto> contacts = employeeAttendanceModel.getAttendanceDetailsFromNic(nic);
                 if (contacts == null) {
@@ -279,7 +294,7 @@ public class EmployeeAttendancePageController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Error when display results").show();
             }
         }
-
+*/
     public void goToDashboard(MouseEvent mouseEvent) {
         navigateTo("/view/Dashboard.fxml");
     }

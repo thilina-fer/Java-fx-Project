@@ -255,22 +255,34 @@ public class ItemPageController implements Initializable {
     }
 
     public void search(KeyEvent keyEvent) {
-        searchField.getText();
-        String phoneNum = searchField.getText();
-
-        if (phoneNum.equals("")) {
+        String searchText = searchField.getText();
+        if (searchText.isEmpty()){
             try {
                 loadTableData();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Faild to load Suppliers").show();
             }
-        } else {
-            loadSearchResults(phoneNum);
+        }else {
+            try {
+                ArrayList<ItemDto> customerList = itemModel.searchItem(searchText);
+                tblItem.setItems(FXCollections.observableArrayList(
+                        customerList.stream()
+                                .map(itemDto -> new ItemTm(
+                                        itemDto.getItemId(),
+                                        itemDto.getItemName(),
+                                        itemDto.getQuantity(),
+                                        itemDto.getBuyPrice(),
+                                        itemDto.getSellPrice()
+                                )).toList()
+                ));
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to search items").show();
+            }
         }
     }
-    private void loadSearchResults(String phoneNum) {
+    /*private void loadSearchResults(String phoneNum) {
         try {
             ArrayList<ItemDto> contacts = itemModel.getItemDetailsFromName(phoneNum);
             if (contacts == null) {
@@ -291,6 +303,6 @@ public class ItemPageController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error when display results").show();
         }
-    }
+    }*/
 }
 

@@ -9,8 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.dto.SupplierDto;
 import lk.ijse.finalproject.dto.SupplierOrderDto;
+import lk.ijse.finalproject.dto.tm.ItemTm;
 import lk.ijse.finalproject.dto.tm.SupplierOrderTm;
 import lk.ijse.finalproject.dto.tm.SupplierTm;
 import lk.ijse.finalproject.model.SupplierOrderModel;
@@ -236,23 +238,35 @@ public class SupplierOrderPageController implements Initializable {
     }
 
     public void search(KeyEvent keyEvent) {
-        searchField.getText();
-        String phoneNum = searchField.getText();
-
-        if (phoneNum.equals("")) {
+        String searchText = searchField.getText();
+        if (searchText.isEmpty()){
             try {
                 loadTableData();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to load Orders").show();
             }
-        } else {
-            loadSearchResults(phoneNum);
+        }else {
+            try {
+                ArrayList<SupplierOrderDto> orderList = supplierOrderModel.searchSupplierOrders(searchText);
+                tblSupplierOrder.setItems(FXCollections.observableArrayList(
+                        orderList.stream()
+                                .map(supplierOrderDto -> new SupplierOrderTm(
+                                        supplierOrderDto.getSupplyOrderId(),
+                                        supplierOrderDto.getSupplierId(),
+                                        supplierOrderDto.getUserId(),
+                                        supplierOrderDto.getDate(),
+                                        supplierOrderDto.getItemId()
+                                )).toList()
+                ));
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to search orders").show();
+            }
         }
     }
 
-    private void loadSearchResults(String phoneNum) {
+   /* private void loadSearchResults(String phoneNum) {
         try {
             ArrayList<SupplierOrderDto> contacts = supplierOrderModel.getSupplierOrderDetailsFromSupplierOrderId(phoneNum);
             if (contacts == null) {
@@ -273,5 +287,5 @@ public class SupplierOrderPageController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error when display results").show();
         }
-    }
+    }*/
 }

@@ -9,8 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.EmployeeDto;
 import lk.ijse.finalproject.dto.ItemDto;
+import lk.ijse.finalproject.dto.tm.CustomerTm;
 import lk.ijse.finalproject.dto.tm.EmployeeTm;
 import lk.ijse.finalproject.dto.tm.ItemTm;
 import lk.ijse.finalproject.model.EmployeeModel;
@@ -248,22 +250,36 @@ public class EmployeePageController implements Initializable {
     }
 
     public void search(KeyEvent keyEvent) {
-        searchField.getText();
-        String phoneNum = searchField.getText();
-
-        if (phoneNum.equals("")) {
+        String searchText = searchField.getText();
+        if (searchText.isEmpty()){
             try {
                 loadTableData();
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            } catch (ClassNotFoundException e) {
-                throw new RuntimeException(e);
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Faild to load Customers").show();
             }
-        } else {
-            loadSearchResults(phoneNum);
+        }else {
+            try {
+                ArrayList<EmployeeDto> customerList = employeeModel.searchEmployee(searchText);
+                tblEmployee.setItems(FXCollections.observableArrayList(
+                        customerList.stream()
+                                .map(employeeDto -> new EmployeeTm(
+                                        employeeDto.getEmployeeId(),
+                                        employeeDto.getEmployeeName(),
+                                        employeeDto.getEmployeeContact(),
+                                        employeeDto.getEmployeeAddress(),
+                                        employeeDto.getEmployeeNic(),
+                                        employeeDto.getEmployeeAge(),
+                                        employeeDto.getSalary()
+                                )).toList()
+                ));
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to search customers").show();
+            }
         }
     }
-    private void loadSearchResults(String phoneNum) {
+    /*private void loadSearchResults(String phoneNum) {
         try {
             ArrayList<EmployeeDto> contacts = employeeModel.getEmployeeDetailsFromContact(phoneNum);
             if (contacts == null) {
@@ -286,7 +302,7 @@ public class EmployeePageController implements Initializable {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Error when display results").show();
         }
-    }
+    }*/
 
     public void goToDashboard(MouseEvent mouseEvent) {
         navigateTo("/view/Dashboard.fxml");

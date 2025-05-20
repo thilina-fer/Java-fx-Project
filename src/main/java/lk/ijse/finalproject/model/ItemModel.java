@@ -1,5 +1,6 @@
 package lk.ijse.finalproject.model;
 
+import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.util.CrudUtil;
 
@@ -66,7 +67,7 @@ public class ItemModel {
         }
         return tableChartacter + "001";
     }
-    public ArrayList<ItemDto> getItemDetailsFromName(String itemName) throws SQLException {
+    /*public ArrayList<ItemDto> getItemDetailsFromName(String itemName) throws SQLException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM item WHERE item_name = ?", itemName);
         ArrayList<ItemDto> dtos = new ArrayList<>();
         if (rst.next()) {
@@ -77,6 +78,25 @@ public class ItemModel {
                     rst.getDouble(4),
                     rst.getDouble(5)
             ));
+        }
+        return dtos;
+    }*/
+
+    public ArrayList<ItemDto> searchItem(String searchText) throws SQLException {
+        ArrayList<ItemDto> dtos = new ArrayList<>();
+        String sql = "SELECT * FROM item WHERE item_id LIKE ? OR item_name LIKE ? OR quantity LIKE ? OR buying_price LIKE ? OR selling_price LIKE ?";
+        String pattern = "%" + searchText + "%";
+        ResultSet resultSet = CrudUtil.execute(sql , pattern , pattern , pattern , pattern , pattern);
+
+        while (resultSet.next()){
+            ItemDto itemDto = new ItemDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getInt(3),
+                    resultSet.getDouble(4),
+                    resultSet.getDouble(5)
+            );
+            dtos.add(itemDto);
         }
         return dtos;
     }

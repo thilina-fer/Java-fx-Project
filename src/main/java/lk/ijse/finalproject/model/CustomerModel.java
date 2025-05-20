@@ -59,16 +59,23 @@ public class CustomerModel {
         }
         return tableChartacter + "001";
     }
-    public ArrayList<CustomerDto> getCustomerDetailsFromContact(String phoneNum) throws SQLException {
-        ResultSet rst = CrudUtil.execute("SELECT * FROM customer WHERE customer_contact = ?", phoneNum);
+    public ArrayList<CustomerDto> searchCustomer(String searchText) throws SQLException {
         ArrayList<CustomerDto> dtos = new ArrayList<>();
-        if (rst.next()) {
-            dtos.add(new CustomerDto(
-                    rst.getString(1),
-                    rst.getString(2),
-                    rst.getString(3),
-                    rst.getString(4)));
-        }
-        return dtos;
+        String sql = "SELECT * FROM customer WHERE customer_id LIKE ? OR customer_name LIKE ? OR customer_contact LIKE ? OR customer_address LIKE ?";
+            String pattern = "%" + searchText + "%";
+            ResultSet resultSet = CrudUtil.execute(sql , pattern , pattern , pattern , pattern);
+
+            while (resultSet.next()) {
+                CustomerDto dto = new CustomerDto(
+                        resultSet.getString(1),
+                        resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4)
+                );
+                dtos.add(dto);
+            }
+            return dtos;
     }
+
+
 }

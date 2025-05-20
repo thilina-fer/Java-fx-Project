@@ -1,5 +1,6 @@
 package lk.ijse.finalproject.model;
 
+import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.dto.SupplierDto;
 import lk.ijse.finalproject.dto.SupplierOrderDto;
 import lk.ijse.finalproject.util.CrudUtil;
@@ -61,7 +62,7 @@ public class SupplierOrderModel {
         }
         return tableString + "001";
     }
-    public ArrayList<SupplierOrderDto> getSupplierOrderDetailsFromSupplierOrderId(String id) throws SQLException {
+   /* public ArrayList<SupplierOrderDto> getSupplierOrderDetailsFromSupplierOrderId(String id) throws SQLException {
         ResultSet rst = CrudUtil.execute("SELECT * FROM so_id WHERE so_id = ?", id);
         ArrayList<SupplierOrderDto> dtos = new ArrayList<>();
         if (rst.next()) {
@@ -72,6 +73,25 @@ public class SupplierOrderModel {
                     rst.getString(4),
                     rst.getString(5)
             ));
+        }
+        return dtos;
+    }*/
+
+    public ArrayList<SupplierOrderDto> searchSupplierOrders(String searchText) throws SQLException {
+        ArrayList<SupplierOrderDto> dtos = new ArrayList<>();
+        String sql = "SELECT * FROM supplier_order WHERE so_id LIKE ? OR supplier_id LIKE ? OR user_id LIKE ? OR date LIKE ? OR item_id LIKE ?";
+        String pattern = "%" + searchText + "%";
+        ResultSet resultSet = CrudUtil.execute(sql , pattern , pattern , pattern , pattern , pattern);
+
+        while (resultSet.next()) {
+            SupplierOrderDto dto = new SupplierOrderDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4),
+                    resultSet.getString(5)
+            );
+            dtos.add(dto);
         }
         return dtos;
     }
