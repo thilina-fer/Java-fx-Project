@@ -1,12 +1,13 @@
 package lk.ijse.finalproject.dto.tm;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @Data
+@Setter
+@ToString
 
 public class ItemTm {
     private String itemId;

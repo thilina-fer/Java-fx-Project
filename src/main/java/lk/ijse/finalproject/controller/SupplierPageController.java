@@ -264,4 +264,7 @@ public class SupplierPageController implements Initializable {
         }
     }
 
+    public void goToSupplierOrderPage(MouseEvent mouseEvent) {
+        navigateTo("/view/SupplierOrderPage.fxml");
+    }
 }

@@ -1,5 +1,6 @@
 package lk.ijse.finalproject.model;
 
+import lk.ijse.finalproject.dto.SupplierDto;
 import lk.ijse.finalproject.dto.SupplierOrderDto;
 import lk.ijse.finalproject.util.CrudUtil;
 
@@ -46,7 +47,7 @@ public class SupplierOrderModel {
         return supplierOrderDtoArrayList;
     }
     public String getNextSoId() throws SQLException , ClassNotFoundException{
-        ResultSet resultSet = CrudUtil.execute("SELECT customer_id FROM Customer ORDER BY customer_id DESC LIMIT 1");
+        ResultSet resultSet = CrudUtil.execute("SELECT so_id FROM supplier_order ORDER BY so_id DESC LIMIT 1");
         String  tableString = "SO";
 
         if(resultSet.next()){
@@ -59,5 +60,19 @@ public class SupplierOrderModel {
             return nextIdString;
         }
         return tableString + "001";
+    }
+    public ArrayList<SupplierOrderDto> getSupplierOrderDetailsFromSupplierOrderId(String id) throws SQLException {
+        ResultSet rst = CrudUtil.execute("SELECT * FROM so_id WHERE so_id = ?", id);
+        ArrayList<SupplierOrderDto> dtos = new ArrayList<>();
+        if (rst.next()) {
+            dtos.add(new SupplierOrderDto(
+                    rst.getString(1),
+                    rst.getString(2),
+                    rst.getString(3),
+                    rst.getString(4),
+                    rst.getString(5)
+            ));
+        }
+        return dtos;
     }
 }
