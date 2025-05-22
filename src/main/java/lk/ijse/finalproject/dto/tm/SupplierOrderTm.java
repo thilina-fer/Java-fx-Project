@@ -1,12 +1,12 @@
 package lk.ijse.finalproject.dto.tm;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
+@ToString
 
 public class SupplierOrderTm {
     private String supplyOrderId;
@@ -14,6 +14,4 @@ public class SupplierOrderTm {
     private String userId;
     private String date;
     private String itemId;
-
-
 }

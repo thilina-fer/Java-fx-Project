@@ -48,8 +48,8 @@ public class PurchaseOrderController implements Initializable {
 
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
-        colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        colItemId.setCellValueFactory(new PropertyValueFactory<>("itemId"));
+        colDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
+        colItemId.setCellValueFactory(new PropertyValueFactory<>("totAmount"));
 
         try {
             resetPage();

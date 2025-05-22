@@ -5,62 +5,45 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: #FFF;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainPage">
+<AnchorPane fx:id="ancMainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" style="-fx-background-color: linear-gradient(to right, #4d0000, #7a0f0f, #b30000);;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject.controller.MainPageController">
    <children>
-      <StackPane layoutY="204.0" prefHeight="463.0" prefWidth="805.0">
+      <VBox layoutX="50.0" layoutY="50.0" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: #b30000; -fx-background-radius: 20;" AnchorPane.bottomAnchor="50.799999999999955" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="51.600000000000136" AnchorPane.topAnchor="50.0">
          <children>
-            <ImageView fitHeight="547.0" fitWidth="822.0" pickOnBounds="true" preserveRatio="true">
+            <VBox prefHeight="0.0" prefWidth="1286.0">
+               <VBox.margin>
+                  <Insets left="12.0" />
+               </VBox.margin>
+            </VBox>
+            <ImageView fx:id="myImage" fitHeight="706.0" fitWidth="599.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/ALPHA_MODIFICATION-removebg-preview.png" />
+                  <Image url="@../images/ALPHA__1_-removebg-preview.png" />
                </image>
             </ImageView>
-         </children>
-      </StackPane>
-      <VBox layoutX="970.0" layoutY="486.0" prefHeight="200.0" prefWidth="416.0">
-         <children>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #ffff;" text="Sign In">
+            <Button mnemonicParsing="false" onAction="#btnSignInOnAction" prefHeight="61.0" prefWidth="298.0" style="-fx-background-color: linear-gradient(to right, #4d0000, #7a0f0f, #b30000);" text="Sign in" textFill="#eaeaea">
                <VBox.margin>
-                  <Insets bottom="10.0" left="104.0" right="10.0" top="46.0" />
+                  <Insets left="1000.0" top="-161.0" />
                </VBox.margin>
                <font>
-                  <Font name="Berlin Sans FB Bold" size="33.0" />
+                  <Font name="Jokerman" size="27.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: #ffff;" text="Sign Up">
-               <font>
-                  <Font name="Berlin Sans FB Bold" size="33.0" />
-               </font>
-               <VBox.margin>
-                  <Insets left="111.0" />
-               </VBox.margin>
-            </Button>
+            <HBox prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#btnSignUpOnAction" prefHeight="62.0" prefWidth="302.0" style="-fx-background-color: linear-gradient(to right, #4d0000, #7a0f0f, #b30000);" text="Sign Up" textFill="WHITE">
+                     <HBox.margin>
+                        <Insets left="1000.0" top="17.0" />
+                     </HBox.margin>
+                     <font>
+                        <Font name="Jokerman" size="27.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
       </VBox>
-      <VBox layoutX="1398.0" layoutY="-2.0" prefHeight="131.0" prefWidth="132.0" style="-fx-background-color: linear-gradient(to right, #592720, #7B3F00); -fx-background-radius: 20;" />
-      <VBox layoutX="1346.0" layoutY="80.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #0014A8, #2C2C54); -fx-background-radius: 20;" />
-      <VBox layoutX="1302.0" layoutY="14.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #F4C430, #FF9F1C); -fx-background-radius: 20;" />
-      <VBox layoutX="1284.0" layoutY="-20.0" prefHeight="68.0" prefWidth="96.0" style="-fx-background-color: linear-gradient(to right, #43B3AE, #3D9970); -fx-background-radius: 20;" />
-      <VBox layoutX="1270.0" layoutY="96.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #592720, #7B3F00); -fx-background-radius: 20;" />
-      <VBox layoutX="1428.0" layoutY="112.0" prefHeight="89.0" prefWidth="88.0" style="-fx-background-color: linear-gradient(to right, #43B3AE, #3D9970); -fx-background-radius: 20;" />
-      <VBox layoutX="1229.0" layoutY="30.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #0014A8, #2C2C54); -fx-background-radius: 20;" />
-      <VBox layoutX="1346.0" layoutY="157.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #800000, #4B0000); -fx-background-radius: 20;" />
-      <VBox layoutX="1211.0" layoutY="152.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #800000, #FFD700); -fx-background-radius: 20;" />
-      <VBox layoutX="1263.0" layoutY="189.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #E6E6FA, #4B0082); -fx-background-radius: 20;" />
-      <VBox layoutX="1178.0" layoutY="89.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #800000, #900C3F); -fx-background-radius: 20;" />
-      <VBox layoutX="76.0" layoutY="-107.0" prefHeight="131.0" prefWidth="132.0" style="-fx-background-color: linear-gradient(to right, #592720, #7B3F00); -fx-background-radius: 20;" />
-      <VBox layoutX="24.0" layoutY="-25.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #0014A8, #2C2C54); -fx-background-radius: 20;" />
-      <VBox layoutX="-20.0" layoutY="-91.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #F4C430, #FF9F1C); -fx-background-radius: 20;" />
-      <VBox layoutX="-38.0" layoutY="-125.0" prefHeight="68.0" prefWidth="96.0" style="-fx-background-color: linear-gradient(to right, #43B3AE, #3D9970); -fx-background-radius: 20;" />
-      <VBox layoutX="-52.0" layoutY="-9.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #592720, #7B3F00); -fx-background-radius: 20;" />
-      <VBox layoutX="106.0" layoutY="7.0" prefHeight="89.0" prefWidth="88.0" style="-fx-background-color: linear-gradient(to right, #43B3AE, #3D9970); -fx-background-radius: 20;" />
-      <VBox layoutX="-93.0" layoutY="-75.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #0014A8, #2C2C54); -fx-background-radius: 20;" />
-      <VBox layoutX="24.0" layoutY="52.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #800000, #4B0000); -fx-background-radius: 20;" />
-      <VBox layoutX="-111.0" layoutY="47.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #800000, #FFD700); -fx-background-radius: 20;" />
-      <VBox layoutX="-59.0" layoutY="84.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #E6E6FA, #4B0082); -fx-background-radius: 20;" />
-      <VBox layoutX="-144.0" layoutY="-16.0" prefHeight="100.0" prefWidth="103.0" style="-fx-background-color: linear-gradient(to right, #800000, #900C3F); -fx-background-radius: 20;" />
    </children>
 </AnchorPane>

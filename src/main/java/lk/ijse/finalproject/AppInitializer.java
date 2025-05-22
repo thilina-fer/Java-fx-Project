@@ -21,5 +21,9 @@ public class AppInitializer extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Final Project");
         primaryStage.show();
+
+        /*Parent root = FXMLLoader.load(getClass().getResource("/view/MainPage.fxml"));
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();*/
     }
 }

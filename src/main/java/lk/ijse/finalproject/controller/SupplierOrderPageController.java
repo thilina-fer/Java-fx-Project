@@ -48,7 +48,7 @@ public class SupplierOrderPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        colOrderId.setCellValueFactory(new PropertyValueFactory<>("supplierOrderId"));
+        colOrderId.setCellValueFactory(new PropertyValueFactory<>("supplyOrderId"));
         colSupplierId.setCellValueFactory(new PropertyValueFactory<>("supplierId"));
         colUserId.setCellValueFactory(new PropertyValueFactory<>("userId"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("date"));
