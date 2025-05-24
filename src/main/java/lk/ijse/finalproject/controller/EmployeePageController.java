@@ -240,9 +240,7 @@ public class EmployeePageController implements Initializable {
         txtAddress.setText(selectedItem.getEmployeeAddress());
         txtNic.setText(selectedItem.getEmployeeNic());
         txtAge.setText(String.valueOf(selectedItem.getEmployeeAge()));
-        txtSalary.setText(String.valueOf(selectedItem.getSalary()
-
-        ));
+        txtSalary.setText(String.valueOf(selectedItem.getSalary()));
 
         btnSave.setDisable(true);
         btnUpdate.setDisable(false);

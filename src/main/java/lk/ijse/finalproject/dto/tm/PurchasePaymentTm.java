@@ -1,14 +1,14 @@
-package lk.ijse.finalproject.dto;
+package lk.ijse.finalproject.dto.tm;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 
-public class PurchasePaymentDto {
+public class PurchasePaymentTm {
     private String paymentId;
     private String orderId;
     private String paymentType;

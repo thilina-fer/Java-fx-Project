@@ -40,10 +40,11 @@ public class DashboardPageController implements Initializable {
 
     public void btnGoToItemPageOnAction(ActionEvent actionEvent) { navigateTo("/view/ItemPage.fxml"); }
 
-    public void btnGoToEmployeePageOnAction(ActionEvent actionEvent) { navigateTo("/view/EmployeePage.fxml");
-    }
+    public void btnGoToEmployeePageOnAction(ActionEvent actionEvent) { navigateTo("/view/EmployeePage.fxml");}
 
     public void btnGoToPurchaseOrderPageOnAction(ActionEvent actionEvent) { navigateTo("/view/PurchaseOrderPage.fxml");}
 
     public void btnGoToPurchaseReportPageOnAction(ActionEvent actionEvent) {navigateTo("/view/PurchaseReportPage.fxml");}
+
+    public void btnGoToUserPageOnAction(ActionEvent actionEvent) { navigateTo("/view/UserPage.fxml");}
 }

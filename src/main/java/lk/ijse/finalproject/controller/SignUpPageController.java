@@ -72,7 +72,7 @@ public class SignUpPageController {
 
     public void btnSignInOnAction(ActionEvent actionEvent) {
         try {
-            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
+            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
             Stage dashboardStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             dashboardStage.setScene(new Scene(dashboardRoot));
             dashboardStage.setTitle("Alpha Modifications");
