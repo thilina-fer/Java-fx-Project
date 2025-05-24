@@ -187,6 +187,7 @@ public class CustomerPageController implements Initializable {
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) {
+
         resetPage();
     }
 
