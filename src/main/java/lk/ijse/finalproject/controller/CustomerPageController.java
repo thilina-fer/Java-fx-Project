@@ -78,7 +78,7 @@ public class CustomerPageController implements Initializable {
             loadTableData();
             loadNextId();
 
-                btnSave.setDisable(false);
+            btnSave.setDisable(false);
             btnDelete.setDisable(true);
             btnUpdate.setDisable(true);
 

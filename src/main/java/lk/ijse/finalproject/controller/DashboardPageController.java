@@ -52,5 +52,6 @@ public class DashboardPageController implements Initializable {
 
     public void btnGoToOrderPaymentsPageOnAction(ActionEvent actionEvent) { navigateTo("/view/OrderPaymentPage.fxml"); }
 
+    public void btnGoToPurchasePaymentsPageOnAction(ActionEvent actionEvent) { navigateTo("/view/PurchasePaymentPage.fxml"); }
 }
 

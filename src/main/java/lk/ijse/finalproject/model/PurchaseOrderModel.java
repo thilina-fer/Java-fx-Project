@@ -12,15 +12,15 @@ public class PurchaseOrderModel {
     public boolean savePurchaseOrder(PurchaseOrderDto purchaseOrderDto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO Purchase_Order VALUES(?,?,?,?)",
                 purchaseOrderDto.getOrderId(),
-                purchaseOrderDto.getCustomerId(),
+                purchaseOrderDto.getCustomerContact(),
                 purchaseOrderDto.getOrderDate(),
                 purchaseOrderDto.getTotAmount()
         );
     }
 
     public boolean updatePurchaseOrder(PurchaseOrderDto purchaseOrderDto) throws SQLException, ClassNotFoundException {
-        return CrudUtil.execute("UPDATE Purchase_Order SET customer_id = ? , order_date = ? , total_amount = ? WHERE order_id = ?",
-                purchaseOrderDto.getCustomerId(),
+        return CrudUtil.execute("UPDATE Purchase_Order SET customer_contact = ? , order_date = ? , total_amount = ? WHERE order_id = ?",
+                purchaseOrderDto.getCustomerContact(),
                 purchaseOrderDto.getOrderDate(),
                 purchaseOrderDto.getTotAmount(),
                 purchaseOrderDto.getOrderId()
@@ -87,7 +87,7 @@ public class PurchaseOrderModel {
 
     public ArrayList<PurchaseOrderDto> searchPurchaseOrder(String id) throws SQLException {
         ArrayList<PurchaseOrderDto> dtos = new ArrayList<>();
-        String sql = "SELECT * FROM purchase_order WHERE order_id LIKE ? OR customer_id LIKE ? OR order_date LIKE ? OR total_amount LIKE ?";
+        String sql = "SELECT * FROM purchase_order WHERE order_id LIKE ? OR customer_contact LIKE ? OR order_date LIKE ? OR total_amount LIKE ?";
         String pattern = "%" + id + "%";
         ResultSet resultSet = CrudUtil.execute(sql , pattern , pattern , pattern , pattern);
 

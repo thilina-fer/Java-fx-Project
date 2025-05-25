@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 public class PurchaseOrderDto {
     private String orderId;
-    private String customerId;
+    private String customerContact;
     private String orderDate;
     private double totAmount;
 }

@@ -9,9 +9,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.PurchaseOrderDto;
-import lk.ijse.finalproject.dto.tm.CustomerTm;
 import lk.ijse.finalproject.dto.tm.PurchaseOrderTm;
 import lk.ijse.finalproject.model.PurchaseOrderModel;
 
@@ -25,12 +23,12 @@ public class PurchaseOrderController implements Initializable {
     public Label lblOrderId;
     public TextField txtDate;
     public TextField txtAmount;
-    public ComboBox comboCustomerId;
+    public ComboBox comboCustomerContact;
 
 
     public TableView<PurchaseOrderTm> tblPurchaseOrder;
     public TableColumn<PurchaseOrderTm , String> colOrderId;
-    public TableColumn<PurchaseOrderTm , String> colCustomerId;
+    public TableColumn<PurchaseOrderTm , String> colCustomerContact;
     public TableColumn<PurchaseOrderTm , String> colDate;
     public TableColumn<PurchaseOrderTm , String> colItemId;
 
@@ -47,7 +45,7 @@ public class PurchaseOrderController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
-        colCustomerId.setCellValueFactory(new PropertyValueFactory<>("customerId"));
+        colCustomerContact.setCellValueFactory(new PropertyValueFactory<>("customerContact"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
         colItemId.setCellValueFactory(new PropertyValueFactory<>("totAmount"));
 
@@ -64,7 +62,7 @@ public class PurchaseOrderController implements Initializable {
                 purchaseOrderModel.getAllPurchaseOrder().stream()
                         .map(purchaseOrderDto -> new PurchaseOrderTm(
                                 purchaseOrderDto.getOrderId(),
-                                purchaseOrderDto.getCustomerId(),
+                                purchaseOrderDto.getCustomerContact(),
                                 purchaseOrderDto.getOrderDate(),
                                 purchaseOrderDto.getTotAmount()
                         )).toList()
@@ -80,7 +78,7 @@ public class PurchaseOrderController implements Initializable {
             btnDelete.setDisable(true);
             btnUpdate.setDisable(true);
 
-            comboCustomerId.getSelectionModel().clearSelection();
+            comboCustomerContact.getSelectionModel().clearSelection();
             txtDate.setText(null);
             txtAmount.setText(null);
         }catch (Exception e){
@@ -91,13 +89,13 @@ public class PurchaseOrderController implements Initializable {
 
     public void btnSaveOnAction(ActionEvent actionEvent) {
         String orderId = lblOrderId.getText();
-        String customerId = (String) comboCustomerId.getValue();
+        String customerContact = (String) comboCustomerContact.getValue();
         String date = txtDate.getText();
         double amount = Double.parseDouble(txtAmount.getText());
 
         PurchaseOrderDto purchaseOrderDto = new PurchaseOrderDto(
                 orderId,
-                customerId,
+                customerContact,
                 date,
                 Double.parseDouble(String.valueOf(amount))
         );
@@ -120,13 +118,13 @@ public class PurchaseOrderController implements Initializable {
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
         String orderId = lblOrderId.getText();
-        String customerId = (String) comboCustomerId.getValue();
+        String customerContact = (String) comboCustomerContact.getValue();
         String date = txtDate.getText();
         double amount = Double.parseDouble(txtAmount.getText());
 
         PurchaseOrderDto purchaseOrderDto = new PurchaseOrderDto(
                 orderId,
-                customerId,
+                customerContact,
                 date,
                 Double.parseDouble(String.valueOf(amount))
         );
@@ -189,7 +187,7 @@ public class PurchaseOrderController implements Initializable {
 
         if (selectedItem != null){
             lblOrderId.setText(selectedItem.getOrderId());
-            comboCustomerId.getSelectionModel().select(selectedItem.getCustomerId());
+            comboCustomerContact.getSelectionModel().select(selectedItem.getCustomerContact());
             txtDate.setText(selectedItem.getOrderDate());
             txtAmount.setText(String.valueOf(selectedItem.getTotAmount()));
 
@@ -236,7 +234,7 @@ public class PurchaseOrderController implements Initializable {
                         orderList.stream()
                                 .map(purchaseOrderDto -> new PurchaseOrderTm(
                                         purchaseOrderDto.getOrderId(),
-                                        purchaseOrderDto.getCustomerId(),
+                                        purchaseOrderDto.getCustomerContact(),
                                         purchaseOrderDto.getOrderDate(),
                                         purchaseOrderDto.getTotAmount()
                                 )).toList()
