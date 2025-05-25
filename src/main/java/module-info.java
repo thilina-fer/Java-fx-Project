@@ -7,5 +7,6 @@ module lk.ijse.finalproject {
 
     opens lk.ijse.finalproject.controller to javafx.fxml;
     opens lk.ijse.finalproject.dto.tm to javafx.base;
+    opens lk.ijse.finalproject.dto to javafx.base;
     exports lk.ijse.finalproject;
 }
