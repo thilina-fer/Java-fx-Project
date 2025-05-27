@@ -9,7 +9,10 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.StringConverter;
+import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.PurchaseOrderDto;
+import lk.ijse.finalproject.dto.SupplierOrderDto;
 import lk.ijse.finalproject.dto.tm.PurchaseOrderTm;
 import lk.ijse.finalproject.model.PurchaseOrderModel;
 
@@ -40,6 +43,10 @@ public class PurchaseOrderController implements Initializable {
     public Button btnReset;
     public TextField searchField;
     public AnchorPane ancPurchseOrderPage;
+    public TextField txtCustomerContact;
+
+    public PurchaseOrderController() throws SQLException {
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -248,4 +255,82 @@ public class PurchaseOrderController implements Initializable {
     public void goToDashboard(MouseEvent mouseEvent) {
         navigateTo("/view/Dashboard.fxml");
     }
+   // public void loadItemDetails(){
+    /*public void secondSearch(KeyEvent keyEvent) {
+        String searchText = txtCustomerContact.getText();
+        if (searchText.isEmpty()){
+            try {
+                loadTableData();
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Faild to load Customers").show();
+            }
+        }else {
+            try {
+                ArrayList<CustomerDto> customerList = purchaseOrderModel.searchCustomer(searchText);
+                comboCustomerContact.setItems(FXCollections.observableArrayList(
+                        customerList.stream().
+                                map(customerDto -> new CustomerDto(
+                                        customerDto.getCustomerId(),
+                                        customerDto.getCustomerName(),
+                                        customerDto.getCustomerContact(),
+                                        customerDto.getCustomerAddresss()
+                                )).toList()
+                ));
+            }catch (Exception e){
+                e.printStackTrace();
+                new Alert(Alert.AlertType.ERROR, "Failed to search customers").show();
+            }
+        }
+    }*/
+   /*public void secondSearch(KeyEvent keyEvent) {
+       String searchText = txtCustomerContact.getText().trim();
+
+       try {
+           if (searchText.isEmpty()) {
+               loadTableData(); // Load all customers
+           } else {
+               ArrayList<CustomerDto> customerList = purchaseOrderModel.searchCustomer(searchText);
+               comboCustomerContact.setItems(FXCollections.observableArrayList(customerList));
+           }
+       } catch (Exception e) {
+           e.printStackTrace();
+           new Alert(Alert.AlertType.ERROR, "Failed to load/search customers").show();
+       }
+   }*/
+
+    public void secondSearch(KeyEvent keyEvent) {
+        String keyword = txtCustomerContact.getText().trim();
+
+        try {
+            ArrayList<CustomerDto> customers;
+
+            if (keyword.isEmpty()) {
+                customers = purchaseOrderModel.getAllCustomers(); // You must have this method
+            } else {
+                customers = purchaseOrderModel.searchCustomer(keyword);
+            }
+
+            comboCustomerContact.setItems(FXCollections.observableArrayList(customers));
+
+            // Optional: define how items are shown in ComboBox
+            comboCustomerContact.setConverter(new StringConverter<CustomerDto>() {
+                @Override
+                public String toString(CustomerDto customer) {
+                    return customer == null ? "" : customer.getCustomerName() + " (" + customer.getCustomerContact() + ")";
+                }
+
+                @Override
+                public CustomerDto fromString(String string) {
+                    return null; // Not used
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            new Alert(Alert.AlertType.ERROR, "Failed to load customer data").show();
+        }
+    }
+
+
 }

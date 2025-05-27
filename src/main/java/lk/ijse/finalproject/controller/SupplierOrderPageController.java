@@ -56,6 +56,9 @@ public class SupplierOrderPageController implements Initializable {
 
         try {
             loadTableData();
+            loadSupplierDetails();
+            loadUserId();
+            loadItemDetails();
             resetPage();
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,10 +88,10 @@ public class SupplierOrderPageController implements Initializable {
             btnUpdate.setDisable(true);
             btnDelete.setDisable(true);
 
-            comboSupplierId.getSelectionModel().clearSelection();;
+            comboSupplierId.getSelectionModel().clearSelection();
             ComboUserId.getSelectionModel().clearSelection();
             txtDate.setText(java.time.LocalDate.now().toString());
-            comboItemId.getSelectionModel().clearSelection();;
+            comboItemId.getSelectionModel().clearSelection();
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Something went Wrong").show();
@@ -288,4 +291,15 @@ public class SupplierOrderPageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Error when display results").show();
         }
     }*/
+
+    private void loadSupplierDetails() throws SQLException {
+        comboSupplierId.setItems(FXCollections.observableArrayList(supplierOrderModel.getAllSupplierDetails()));
+    }
+
+    private void loadUserId() throws SQLException {
+        ComboUserId.setItems(FXCollections.observableArrayList(supplierOrderModel.getAllUserId()));
+    }
+    private void loadItemDetails() throws SQLException {
+        comboItemId.setItems(FXCollections.observableArrayList(supplierOrderModel.getAllItemDetails()));
+    }
 }

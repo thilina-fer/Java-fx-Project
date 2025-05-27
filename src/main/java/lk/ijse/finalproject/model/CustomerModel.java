@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class CustomerModel {
+
     public boolean saveCustomer(CustomerDto customerDto) throws SQLException {
         return CrudUtil.execute("INSERT INTO customer VALUES(?,?,?,?)",
                 customerDto.getCustomerId(),
@@ -29,7 +30,7 @@ public class CustomerModel {
                 customerId);
     }
 
-    public ArrayList<CustomerDto> getAllCustomer() throws SQLException {
+    public static ArrayList<CustomerDto> getAllCustomer() throws SQLException {
         ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer");
         ArrayList<CustomerDto> dtos = new ArrayList<>();
 

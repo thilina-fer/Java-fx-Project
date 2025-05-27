@@ -95,4 +95,44 @@ public class SupplierOrderModel {
         }
         return dtos;
     }
+    public ArrayList<String> getAllSupplierDetails() throws SQLException {
+        ArrayList<String> supplierDetails = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT supplier_id , supplier_name , supplier_contact , supplier_address FROM supplier");
+
+        while (resultSet.next()){
+            String details = "supplierId : " + resultSet.getString("supplier_id") + "\n" +
+                             "supplierName : " + resultSet.getString("supplier_name") + "\n" +
+                             "supplierContact : " + resultSet.getString("supplier_contact") + "\n" +
+                             "supplierAddress : " + resultSet.getString("supplier_address") + "\n\n";
+
+            supplierDetails.add(details);
+         }
+        return supplierDetails;
+    }
+
+    public ArrayList<String> getAllUserId() throws SQLException {
+        ArrayList<String> userIds = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT user_id FROM user");
+
+        while (resultSet.next()){
+            userIds.add(resultSet.getString("user_id"));
+        }
+        return userIds;
+    }
+    public ArrayList<String> getAllItemDetails() throws SQLException {
+        ArrayList<String> itemDetails = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT item_id , item_name , quantity , buying_price , " +
+                "selling_price FROM item");
+
+        while (resultSet.next()){
+            String details = "item Id : " + resultSet.getString("item_id") + "\n" +
+                    "item Name : " + resultSet.getString("item_name") + "\n" +
+                    "quantity : " + resultSet.getInt("quantity") + "\n" +
+                    "buying Price : " + resultSet.getDouble("buying_price") + "\n" +
+                    "selling Price : " + resultSet.getDouble("selling_price") + "\n\n";
+
+            itemDetails.add(details);
+        }
+        return itemDetails;
+    }
 }

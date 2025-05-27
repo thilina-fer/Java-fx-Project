@@ -55,6 +55,8 @@ public class OrderPaymentController implements Initializable {
 
         try {
             resetPage();
+            loadSupplierIds();
+            loadTbleData();
         } catch (Exception e) {
             e.printStackTrace();
             new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
@@ -86,7 +88,7 @@ public class OrderPaymentController implements Initializable {
             comboSupplierId.getSelectionModel().clearSelection();
             comboSupplyOrderI.getSelectionModel().clearSelection();
             txtAmount.setText(null);
-            comboType.getSelectionModel().clearSelection();
+            comboType.getItems().addAll("Cash", "Card", "Online");
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -255,6 +257,10 @@ public class OrderPaymentController implements Initializable {
     public void goToDashboard(MouseEvent mouseEvent) {
         navigateTo("/view/Dashboard.fxml");
     }
-
-
+    public void loadSupplierIds() throws SQLException, ClassNotFoundException {
+        comboSupplierId.setItems(FXCollections.observableArrayList(orderPaymentModel.getAllSupplierIds()));
+    }
+    public void loadSupplyOrderIds() throws SQLException, ClassNotFoundException {
+        comboSupplyOrderI.setItems(FXCollections.observableArrayList(orderPaymentModel.getAllSupplierOrderIds()));
+    }
 }

@@ -89,17 +89,27 @@ public class PurchasePaymentModel {
         return dtos;
     }
 
-    public Object getAllOrderIds() {
-        try {
-            ResultSet resultSet = CrudUtil.execute("SELECT order_id FROM purchase_order");
-            ArrayList<String> orderIds = new ArrayList<>();
-            while (resultSet.next()) {
-                orderIds.add(resultSet.getString("order_id"));
-            }
-            return orderIds;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
+
+    /*public ArrayList<String> getAllOrderIds() throws SQLException {
+        ArrayList<String> orderIds = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT order_id, order_date, customer_id, total FROM purchase_order");
+        while (resultSet.next()){
+            orderIds.add(
+                    resultSet.getString("order_id"));
         }
+        return orderIds;
+    }*/
+
+    public ArrayList<String> getAllOrderDetails() throws SQLException {
+        ArrayList<String> orderDetails = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT order_id, customer_contact, order_date, total_amount FROM purchase_order");
+        while (resultSet.next()){
+            String detail = "orderId : " + resultSet.getString("order_id") + "\n" +
+                    "customerContact : " + resultSet.getString("customer_contact") + "\n" +
+                    "orderDate : " + resultSet.getString("order_date") + "\n" +
+                    "total : " + resultSet.getDouble("total_amount") + "\n\n";
+            orderDetails.add(detail);
+        }
+        return orderDetails;
     }
 }

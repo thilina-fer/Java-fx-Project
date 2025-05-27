@@ -16,6 +16,7 @@ import lk.ijse.finalproject.dto.tm.PurchaseReportTm;
 import lk.ijse.finalproject.model.PurchaseReportModel;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -66,6 +67,7 @@ public class PurchaseReportPageController implements Initializable {
     private void resetPage() {
         try {
             loadTableData();
+            loadOrderDetails();
             loadNextId();
 
             btnSave.setDisable(true);
@@ -236,4 +238,8 @@ public class PurchaseReportPageController implements Initializable {
     public void goToSaveSupplierPage(MouseEvent mouseEvent) {
         navigateTo("/view/SupplierOrderPage.fxml");
     }
+    private void loadOrderDetails() throws SQLException, ClassNotFoundException {
+        comboOrderId.setItems(FXCollections.observableArrayList(purchaseReportModel.getAllOrderDetails()));
+    }
+
 }

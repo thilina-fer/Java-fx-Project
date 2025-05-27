@@ -80,4 +80,20 @@ public class OrderPaymentModel {
         }
         return dtos;
     }
+    public ArrayList<String> getAllSupplierIds() throws SQLException, ClassNotFoundException {
+        ArrayList<String> supplierIds = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT supplier_id FROM supplier");
+        while (resultSet.next()) {
+            supplierIds.add(resultSet.getString("supplier_id"));
+        }
+        return supplierIds;
+    }
+    public ArrayList<String > getAllSupplierOrderIds() throws SQLException, ClassNotFoundException {
+        ArrayList<String> supplierOrderIds = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT so_id FROM supplier_order");
+        while (resultSet.next()) {
+            supplierOrderIds.add(resultSet.getString("so_id"));
+        }
+        return supplierOrderIds;
+    }
 }

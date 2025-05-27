@@ -77,4 +77,16 @@ public class PurchaseReportModel {
         }
         return dtos;
     }
+    public ArrayList<String> getAllOrderDetails() throws SQLException {
+        ArrayList<String> orderDetails = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT order_id, customer_contact, order_date, total_amount FROM purchase_order");
+        while (resultSet.next()){
+            String detail = "orderId : " + resultSet.getString("order_id") + "\n" +
+                    "customerContact : " + resultSet.getString("customer_contact") + "\n" +
+                    "orderDate : " + resultSet.getString("order_date") + "\n" +
+                    "total : " + resultSet.getDouble("total_amount") + "\n\n";
+            orderDetails.add(detail);
+        }
+        return orderDetails;
+    }
 }

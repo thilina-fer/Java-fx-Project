@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class PurchaseOrderModel {
+    public PurchaseOrderModel() throws SQLException {
+    }
+
     public boolean savePurchaseOrder(PurchaseOrderDto purchaseOrderDto) throws SQLException, ClassNotFoundException {
         return CrudUtil.execute("INSERT INTO Purchase_Order VALUES(?,?,?,?)",
                 purchaseOrderDto.getOrderId(),
@@ -101,6 +104,73 @@ public class PurchaseOrderModel {
             dtos.add(dto);
         }
         return dtos;
+    }
+    public ArrayList<String> getAllItemDetails() throws SQLException {
+        ArrayList<String> itemDetails = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT item_id , item_name , quantity , buying_price , " +
+                "selling_price FROM item");
+
+        while (resultSet.next()){
+            String details = "item Id : " + resultSet.getString("item_id") + "\n" +
+                    "item Name : " + resultSet.getString("item_name") + "\n" +
+                    "quantity : " + resultSet.getInt("quantity") + "\n" +
+                    "buying Price : " + resultSet.getDouble("buying_price") + "\n" +
+                    "selling Price : " + resultSet.getDouble("selling_price") + "\n\n";
+
+            itemDetails.add(details);
+        }
+        return itemDetails;
+    }
+    /*public ArrayList<CustomerDto> searchCustomer(String id) throws SQLException {
+        ArrayList<CustomerDto> dtos = new ArrayList<>();
+        String sql = "SELECT * FROM customer WHERE customer_id LIKE ? OR customer_name LIKE ? OR customer_contact LIKE ? OR customer_address LIKE ?";
+        String pattern = "%" + id + "%";
+        ResultSet resultSet = CrudUtil.execute(sql, pattern, pattern, pattern, pattern);
+
+        while (resultSet.next()) {
+            CustomerDto dto = new CustomerDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            );
+            dtos.add(dto);
+        }
+        return dtos;
+    }*/
+    public ArrayList<CustomerDto> searchCustomer(String keyword) throws SQLException {
+        ArrayList<CustomerDto> customers = new ArrayList<>();
+        String sql = "SELECT * FROM customer WHERE customer_id LIKE ? OR customer_name LIKE ? OR customer_contact LIKE ? OR customer_address LIKE ?";
+        String pattern = "%" + keyword.trim() + "%";
+
+        ResultSet resultSet = CrudUtil.execute(sql, pattern, pattern, pattern, pattern);
+
+        while (resultSet.next()) {
+            customers.add(new CustomerDto(
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("customer_name"),
+                    resultSet.getString("customer_contact"),
+                    resultSet.getString("customer_address")
+            ));
+        }
+
+        return customers;
+    }
+   public ArrayList<CustomerDto> getAllCustomers() throws SQLException {
+        ArrayList<CustomerDto> customers = new ArrayList<>();
+        String sql = "SELECT * FROM customer";
+        ResultSet resultSet = CrudUtil.execute(sql);
+
+        while (resultSet.next()) {
+            customers.add(new CustomerDto(
+                    resultSet.getString("customer_id"),
+                    resultSet.getString("customer_name"),
+                    resultSet.getString("customer_contact"),
+                    resultSet.getString("customer_address")
+            ));
+        }
+
+        return customers;
     }
 
 }

@@ -11,7 +11,7 @@
 
 <AnchorPane fx:id="ancDashboard" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="lk.ijse.finalproject.controller.DashboardPageController">
    <children>
-      <VBox layoutX="14.0" layoutY="14.0" prefHeight="760.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #fff;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+      <VBox layoutX="14.0" layoutY="14.0" prefHeight="760.0" prefWidth="300.0" style="-fx-background-radius: 20; -fx-background-color: #273F4F;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnCustomerOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Customer">
                <opaqueInsets>
@@ -24,7 +24,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToSupplierPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Supplier">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToSupplierPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Supplier">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -32,7 +32,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToItemPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Item">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToItemPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Item">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -40,7 +40,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToEmployeePageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Employee">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToEmployeePageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Employee">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -48,7 +48,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchaseOrderPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Purchase Order">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchaseOrderPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Purchase Order">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -56,7 +56,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchaseReportPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Reports">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchaseReportPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Reports">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -64,7 +64,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToUserPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="User Manage">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToUserPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="User Manage">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -72,7 +72,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPreOrderPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Pre Orders">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPreOrderPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Pre Orders">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -80,7 +80,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToOrderPaymentsPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Order Payments">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToOrderPaymentsPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Order Payments">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
@@ -88,7 +88,7 @@
                   <Font name="Arial Bold" size="16.0" />
                </font>
             </Button>
-            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchasePaymentsPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" text="Purchase Payments">
+            <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#btnGoToPurchasePaymentsPageOnAction" prefHeight="31.0" prefWidth="300.0" style="-fx-background-color: #0000;" styleClass="cur-button" stylesheets="@button.css" text="Purchase Payments">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

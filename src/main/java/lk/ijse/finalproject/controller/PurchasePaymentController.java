@@ -14,8 +14,10 @@ import lk.ijse.finalproject.dto.PurchasePaymentDto;
 import lk.ijse.finalproject.dto.tm.PreOrderTm;
 import lk.ijse.finalproject.dto.tm.PurchasePaymentTm;
 import lk.ijse.finalproject.model.PurchasePaymentModel;
+import lk.ijse.finalproject.util.CrudUtil;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -91,7 +93,7 @@ public class PurchasePaymentController implements Initializable {
             comboOrderId.getItems().clear();
             comboType.getItems().clear();
 
-            comboOrderId.getItems().addAll(purchasePaymentModel.getAllOrderIds());
+            comboOrderId.getItems().addAll(purchasePaymentModel.getAllOrderDetails());
             comboType.getItems().addAll("Cash", "Card", "Online");
 
             txtDate.clear();
@@ -266,6 +268,11 @@ public class PurchasePaymentController implements Initializable {
         }
 
     }
+    public void goToPurchaseOrder(MouseEvent mouseEvent) {
+        navigateTo("/view/PurchaseOrderPage.fxml");
+    }
 
-
+    private void loadOrderDetails() throws SQLException, ClassNotFoundException {
+        comboOrderId.setItems(FXCollections.observableArrayList(purchasePaymentModel.getAllOrderDetails()));
+    }
 }
