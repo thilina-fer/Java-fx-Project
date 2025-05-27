@@ -76,4 +76,29 @@ public class PreOrderModel {
         }
         return dtos;
     }
+    public ArrayList<String> getAllUserId() throws SQLException {
+        ArrayList<String> userIds = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT user_id FROM user");
+
+        while (resultSet.next()) {
+            userIds.add(resultSet.getString("user_id"));
+        }
+        return userIds;
+    }
+    public ArrayList<String> getAllItemDetails() throws SQLException {
+        ArrayList<String> itemDetails = new ArrayList<>();
+        ResultSet resultSet = CrudUtil.execute("SELECT item_id , item_name , quantity , buying_price , " +
+                "selling_price FROM item");
+
+        while (resultSet.next()){
+            String details =  resultSet.getString("item_id") + "\n" +
+                              resultSet.getString("item_name") + "\n" +
+                              resultSet.getInt("quantity") + "\n" +
+                              resultSet.getDouble("buying_price") + "\n" +
+                              resultSet.getDouble("selling_price") + "\n\n";
+
+            itemDetails.add(details);
+        }
+        return itemDetails;
+    }
 }

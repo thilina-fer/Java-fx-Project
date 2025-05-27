@@ -73,6 +73,8 @@ public class PreOrderPageController implements Initializable {
     private void resetPage()  {
         try {
             loadTableData();
+            loadUserId();
+            loadItemDetils();
             loadNextId();
 
             btnSave.setDisable(false);
@@ -244,5 +246,11 @@ public class PreOrderPageController implements Initializable {
 
     public void goToDashboard(MouseEvent mouseEvent) {
         navigateTo("/view/Dashboard.fxml");
+    }
+    private void loadUserId() throws SQLException {
+        comboUserId.setItems(FXCollections.observableArrayList(preOrderModel.getAllUserId()));
+    }
+    private void loadItemDetils() throws SQLException {
+        comboItemId.setItems(FXCollections.observableArrayList(preOrderModel.getAllItemDetails()));
     }
 }

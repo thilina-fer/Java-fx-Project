@@ -3,9 +3,14 @@ package lk.ijse.finalproject.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -46,12 +51,24 @@ public class DashboardPageController implements Initializable {
 
     public void btnGoToPurchaseReportPageOnAction(ActionEvent actionEvent) {navigateTo("/view/PurchaseReportPage.fxml");}
 
-    public void btnGoToUserPageOnAction(ActionEvent actionEvent) { navigateTo("/view/UserPage.fxml");}
-
     public void btnGoToPreOrderPageOnAction(ActionEvent actionEvent) { navigateTo("/view/PreOrderManagePage.fxml");}
 
     public void btnGoToOrderPaymentsPageOnAction(ActionEvent actionEvent) { navigateTo("/view/OrderPaymentPage.fxml"); }
 
     public void btnGoToPurchasePaymentsPageOnAction(ActionEvent actionEvent) { navigateTo("/view/PurchasePaymentPage.fxml"); }
+
+
+    public void btnGoToUserPageOnAction(ActionEvent actionEvent) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("/view/UserPasswordPopUpPage.fxml"));
+
+        Stage stage = new Stage();
+       stage.setScene(new Scene(root));
+       stage.setTitle("Change Password");
+       stage.initModality(Modality.APPLICATION_MODAL);
+       stage.show();
+
+
+    }
+
 }
 
