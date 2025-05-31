@@ -2,15 +2,18 @@ package lk.ijse.finalproject.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import lk.ijse.finalproject.util.CrudUtil;
 
+import java.net.URL;
 import java.sql.ResultSet;
+import java.util.ResourceBundle;
 
-public class PopUpPageController {
+public class PopUpPageController implements Initializable {
 
     public TextField txtUsename;
     public TextField txtPassword;
@@ -22,7 +25,7 @@ public class PopUpPageController {
     private final String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     public AnchorPane popUpPage;
 
-    private void initialize() {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         txtUsename.textProperty().addListener((observable, oldValue, newValue) -> validFields());
         txtPassword.textProperty().addListener((observable, oldValue, newValue) -> validFields());
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> validFields());

@@ -14,8 +14,10 @@ import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.dto.tm.CustomerTm;
 import lk.ijse.finalproject.dto.tm.ItemTm;
 import lk.ijse.finalproject.model.ItemModel;
+import lk.ijse.finalproject.util.CrudUtil;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -304,5 +306,24 @@ public class ItemPageController implements Initializable {
             new Alert(Alert.AlertType.ERROR, "Error when display results").show();
         }
     }*/
+
+    public ArrayList<String> getAllItemId() throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT item_id FROM item");
+        ArrayList<String> itemIdList = new ArrayList<>();
+        while (resultSet.next()){
+            String itemId = resultSet.getString(1);
+            itemIdList.add(itemId);
+        }
+        return itemIdList;
+    }
+    public String finadNameById(String selectedItemId) throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT item_name FROM item WHERE item_id = ?",
+                selectedItemId
+                );
+        if (resultSet.next()){
+            return resultSet.getString(1);
+        }
+        return null;
+    }
 }
 

@@ -64,6 +64,7 @@ public class DashboardPageController implements Initializable {
         Stage stage = new Stage();
        stage.setScene(new Scene(root));
        stage.setTitle("Change Password");
+
        stage.initModality(Modality.APPLICATION_MODAL);
        stage.show();
 

@@ -148,7 +148,7 @@ public class EmployeePageController implements Initializable {
 
                 if (isSaved) {
                     resetPage();
-                    new Alert(Alert.AlertType.INFORMATION,"Employee Saved Successfullu").show();
+                    new Alert(Alert.AlertType.INFORMATION,"Employee Saved Successfully").show();
                 }else {
                     new Alert(Alert.AlertType.ERROR,"Employee Save failed").show();
                 }
