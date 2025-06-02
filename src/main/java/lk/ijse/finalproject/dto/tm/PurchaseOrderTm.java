@@ -13,4 +13,5 @@ public class PurchaseOrderTm {
     private String customerContact;
     private String orderDate;
     private double totAmount;
+    private String itemId;
 }

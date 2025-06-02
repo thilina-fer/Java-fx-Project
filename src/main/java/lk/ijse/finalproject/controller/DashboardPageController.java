@@ -71,5 +71,8 @@ public class DashboardPageController implements Initializable {
 
     }
 
+    public void btnGoToOrderPageOnAction(ActionEvent event) {
+        navigateTo("/view/Order.fxml");
+    }
 }
 

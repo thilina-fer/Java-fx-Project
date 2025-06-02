@@ -3,6 +3,7 @@ package lk.ijse.finalproject.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
 public class OtpPageContraller {

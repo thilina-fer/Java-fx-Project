@@ -1,3 +1,4 @@
+/*
 package lk.ijse.finalproject.controller;
 
 import javafx.collections.FXCollections;
@@ -12,9 +13,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
 import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.PurchaseOrderDto;
-import lk.ijse.finalproject.dto.SupplierOrderDto;
 import lk.ijse.finalproject.dto.tm.PurchaseOrderTm;
-import lk.ijse.finalproject.model.PurchaseOrderModel;
 
 import java.net.URL;
 import java.sql.SQLException;
@@ -33,7 +32,7 @@ public class PurchaseOrderController implements Initializable {
     public TableColumn<PurchaseOrderTm , String> colOrderId;
     public TableColumn<PurchaseOrderTm , String> colCustomerContact;
     public TableColumn<PurchaseOrderTm , String> colDate;
-    public TableColumn<PurchaseOrderTm , String> colItemId;
+    public TableColumn<PurchaseOrderTm , String> colTotalAmount;
 
     private final PurchaseOrderModel purchaseOrderModel = new PurchaseOrderModel();
 
@@ -45,6 +44,7 @@ public class PurchaseOrderController implements Initializable {
     public AnchorPane ancPurchseOrderPage;
     public TextField txtCustomerContact;
 
+
     public PurchaseOrderController() throws SQLException {
     }
 
@@ -54,7 +54,7 @@ public class PurchaseOrderController implements Initializable {
         colOrderId.setCellValueFactory(new PropertyValueFactory<>("orderId"));
         colCustomerContact.setCellValueFactory(new PropertyValueFactory<>("customerContact"));
         colDate.setCellValueFactory(new PropertyValueFactory<>("orderDate"));
-        colItemId.setCellValueFactory(new PropertyValueFactory<>("totAmount"));
+        //colTotAmount.setCellValueFactory(new PropertyValueFactory<>("totAmount"));
 
         try {
             resetPage();
@@ -256,7 +256,8 @@ public class PurchaseOrderController implements Initializable {
         navigateTo("/view/Dashboard.fxml");
     }
    // public void loadItemDetails(){
-    /*public void secondSearch(KeyEvent keyEvent) {
+    */
+/*public void secondSearch(KeyEvent keyEvent) {
         String searchText = txtCustomerContact.getText();
         if (searchText.isEmpty()){
             try {
@@ -282,8 +283,10 @@ public class PurchaseOrderController implements Initializable {
                 new Alert(Alert.AlertType.ERROR, "Failed to search customers").show();
             }
         }
-    }*/
-   /*public void secondSearch(KeyEvent keyEvent) {
+    }*//*
+
+   */
+/*public void secondSearch(KeyEvent keyEvent) {
        String searchText = txtCustomerContact.getText().trim();
 
        try {
@@ -297,7 +300,8 @@ public class PurchaseOrderController implements Initializable {
            e.printStackTrace();
            new Alert(Alert.AlertType.ERROR, "Failed to load/search customers").show();
        }
-   }*/
+   }*//*
+
 
     public void secondSearch(KeyEvent keyEvent) {
         String keyword = txtCustomerContact.getText().trim();
@@ -334,3 +338,4 @@ public class PurchaseOrderController implements Initializable {
 
 
 }
+*/

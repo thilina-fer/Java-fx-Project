@@ -1,3 +1,4 @@
+/*
 package lk.ijse.finalproject.controller;
 
 import javafx.collections.FXCollections;
@@ -175,16 +176,23 @@ public class OrderController implements Initializable {
         }
         PurchaseOrderDto orderDto = new PurchaseOrderDto(
                 orderId,
-                customerId,
+                selectedCustomerContact,
+                dateOfOrder,
+                cartList
+        );
 
+        */
+/*try {
+            boolean isSaved = purchaseOrderModel.
+        }*//*
 
-        )
 
     }
 
 
 }
-    /*public void initialize(URL url, ResourceBundle resourceBundle) {
+    */
+/*public void initialize(URL url, ResourceBundle resourceBundle) {
         setCellValues();
 
         try {
@@ -292,3 +300,4 @@ public class OrderController implements Initializable {
         }
 
     }}*/
+

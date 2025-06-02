@@ -9,19 +9,25 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import lk.ijse.finalproject.db.DBConnection;
 import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.dto.tm.CustomerTm;
 import lk.ijse.finalproject.dto.tm.ItemTm;
 import lk.ijse.finalproject.model.ItemModel;
 import lk.ijse.finalproject.util.CrudUtil;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.time.LocalDate;
+import java.util.*;
 
 public class ItemPageController implements Initializable {
 
@@ -211,6 +217,7 @@ public class ItemPageController implements Initializable {
     }
 
     public void btnResetOnAction(ActionEvent actionEvent) {
+        resetPage();
     }
 
     private void loadNextId() throws ClassNotFoundException , SQLException{
@@ -324,6 +331,22 @@ public class ItemPageController implements Initializable {
             return resultSet.getString(1);
         }
         return null;
+    }
+
+    public void btnReportOnAction(ActionEvent event) {
+        try {
+            JasperReport report = JasperCompileManager.compileReport(
+                    getClass().getResourceAsStream("/Report/Item.jrxml")
+            );
+            Connection connection = DBConnection.getInstance().getConnection();
+            Map<String, Object> params = new HashMap<>();
+            params.put("P_Date", LocalDate.now().toString());
+            JasperPrint jasperPrint = JasperFillManager.fillReport(report, params, connection);
+
+            JasperViewer.viewReport(jasperPrint, false);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
 

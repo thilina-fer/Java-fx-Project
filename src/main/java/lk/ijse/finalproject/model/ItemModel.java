@@ -1,5 +1,6 @@
 package lk.ijse.finalproject.model;
 
+import lk.ijse.finalproject.dto.CartDto;
 import lk.ijse.finalproject.dto.CustomerDto;
 import lk.ijse.finalproject.dto.ItemDto;
 import lk.ijse.finalproject.util.CrudUtil;
@@ -8,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ItemModel {
+public class          ItemModel {
     public boolean saveItem(ItemDto itemDto) throws ClassNotFoundException, SQLException {
         return CrudUtil.execute(
                 "INSERT INTO Item VALUES(?,?,?,?,?)",
@@ -99,5 +100,36 @@ public class ItemModel {
             dtos.add(itemDto);
         }
         return dtos;
+    }
+
+    public boolean reduceQty(CartDto cartDto) throws SQLException {
+        return CrudUtil.execute("UPDATE item SET quantity = quantity - ? WHERE item_id = ?",
+                cartDto.getQty(),
+                cartDto.getItemId()
+                );
+    }
+    public ArrayList<String> getAllItemIds() throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT item_id FROM item");
+        ArrayList<String> itemIds = new ArrayList<>();
+        while (resultSet.next()) {
+            String id = resultSet.getString(1);
+            itemIds.add(id);
+        }
+        return itemIds;
+    }
+    public ItemDto findById(String selectedItemId) throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM item WHERE item_id = ?",
+                selectedItemId
+        );
+        if (resultSet.next()) {
+            return new ItemDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getInt(3),
+                    resultSet.getDouble(4),
+                    resultSet.getDouble(5)
+            );
+        }
+        return null;
     }
 }

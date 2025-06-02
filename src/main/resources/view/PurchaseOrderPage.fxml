@@ -313,7 +313,8 @@
                                 <TableColumn fx:id="colOrderId" prefWidth="75.0" text="Order Id" />
                                 <TableColumn fx:id="colCustomerContact" prefWidth="75.0" text="Customer Contact" />
                                 <TableColumn fx:id="colDate" prefWidth="75.0" text="Date" />
-                                <TableColumn fx:id="colItemId" prefWidth="75.0" text="TotalAmount" />
+                                <TableColumn fx:id="colTotAmount" prefWidth="75.0" text="TotalAmount" />
+                        <TableColumn fx:id="colItemId" prefWidth="75.0" text="ItemId" />
                             </columns>
                             <VBox.margin>
                                 <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

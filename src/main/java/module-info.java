@@ -5,6 +5,9 @@ module lk.ijse.finalproject {
     requires   lombok;
     requires mysql.connector.j;
     requires com.google.protobuf;
+    requires jdk.jdi;
+    requires java.mail;
+    requires net.sf.jasperreports.core;
 
 
     opens lk.ijse.finalproject.controller to javafx.fxml;

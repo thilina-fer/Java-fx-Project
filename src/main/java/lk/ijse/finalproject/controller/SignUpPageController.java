@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import lk.ijse.finalproject.dto.UserDto;
 import lk.ijse.finalproject.model.UserModel;
@@ -32,6 +33,7 @@ public class SignUpPageController {
     private final String emailPattern = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
     private final String passwordPattern = "^(?=.*[A-Za-z])(?=.*\\d).{8,}$";
     private final String contactPattern = "^[0-9]{10}$";
+    public AnchorPane ancSignUpPage;
 
     public void initialize() {
         txtUsername.textProperty().addListener((observableValue, oldValue, newValue) ->validateFields() );
@@ -71,8 +73,9 @@ public class SignUpPageController {
     }
 
     public void btnSignInOnAction(ActionEvent actionEvent) {
+      //navigateTo("/view/LoginPage.fxml");
         try {
-            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/view/LoginPage.fxml"));
+            Parent dashboardRoot = FXMLLoader.load(getClass().getResource("/view/Dashboard.fxml"));
             Stage dashboardStage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             dashboardStage.setScene(new Scene(dashboardRoot));
             dashboardStage.setTitle("Alpha Modifications");
@@ -153,4 +156,24 @@ public class SignUpPageController {
         }
     }
 
+    private void navigateTo(String path) {
+        try {
+            ancSignUpPage.getChildren().clear();
+
+            AnchorPane anchorPane = FXMLLoader.load(getClass().getResource(path));
+
+            anchorPane.prefWidthProperty().bind(ancSignUpPage.widthProperty());
+            anchorPane.prefHeightProperty().bind(ancSignUpPage.heightProperty());
+
+            ancSignUpPage.getChildren().add(anchorPane);
+
+        } catch (Exception e) {
+            new Alert(Alert.AlertType.ERROR, "Something went wrong").show();
+            e.printStackTrace();
+        }
+    }
+
+    public void goToSignIn(ActionEvent event) {
+        navigateTo("/view/LoginPage.fxml");
+    }
 }

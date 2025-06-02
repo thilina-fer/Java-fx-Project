@@ -78,7 +78,7 @@ public class CustomerModel {
             return dtos;
     }
     public ArrayList<String> getAllCustomerContact() throws SQLException {
-        ResultSet resultSet = CrudUtil.execute("SELECT * FROM customer WHERE customer_contact");
+        ResultSet resultSet = CrudUtil.execute("SELECT customer_contact FROM customer");
         ArrayList<String> contacts = new ArrayList<>();
 
         while (resultSet.next()) {
@@ -86,5 +86,20 @@ public class CustomerModel {
            contacts.add(contact);
         }
         return contacts;
+    }
+
+    public CustomerDto findByContacts(String selectedContacts) throws SQLException {
+        ResultSet resultSet = CrudUtil.execute("SELECT * FROM Customer WHERE customer_contact = ?",
+                selectedContacts
+        );
+        if (resultSet.next()) {
+            return new CustomerDto(
+                    resultSet.getString(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getString(4)
+            );
+        }
+        return null;
     }
 }
